@@ -1,7 +1,7 @@
 import Plugin from "../core/plugins";
-import { PluginDescription } from "../core/plugins/plugin-description";
+import { Plugin描述 } from "../core/plugins/plugin-description";
 import { OpenAIMessage, Parameters } from "../core/chat/types";
-import { maxTokensByModel } from "../core/chat/openai";
+import { maxTokensBy模型 } from "../core/chat/openai";
 import { countTokens, runChatTrimmer } from "../core/tokenizer/wrapper";
 
 export interface ContextTrimmerPluginOptions {
@@ -12,28 +12,28 @@ export interface ContextTrimmerPluginOptions {
 }
 
 export class ContextTrimmerPlugin extends Plugin<ContextTrimmerPluginOptions> {
-    describe(): PluginDescription {
+    describe(): Plugin描述 {
         return {
             id: "context-trimmer",
             name: "Message Context",
             options: [
                 {
                     id: 'maxTokens',
-                    displayOnSettingsScreen: "chat",
+                    displayOn设置Screen: "chat",
                     defaultValue: 2048,
                     scope: "chat",
                     renderProps: (value, options) => ({
                         label: `Include a maximum of ${value} tokens`,
                         type: "slider",
                         min: 512,
-                        max: maxTokensByModel[options.getOption('parameters', 'model')] || 2048,
+                        max: maxTokensBy模型[options.getOption('parameters', 'model')] || 2048,
                         step: 64,
                     }),
                     validate: (value, options) => {
-                        const max = maxTokensByModel[options.getOption('parameters', 'model')] || 2048;
+                        const max = maxTokensBy模型[options.getOption('parameters', 'model')] || 2048;
                         return value <= max;
                     },
-                    displayInQuickSettings: {
+                    displayInQuick设置: {
                         name: "Max Tokens",
                         displayByDefault: false,
                         label: value => `Max tokens: ${value}`,
@@ -41,7 +41,7 @@ export class ContextTrimmerPlugin extends Plugin<ContextTrimmerPluginOptions> {
                 },
                 // {
                 //     id: 'maxMessages',
-                //     displayOnSettingsScreen: "chat",
+                //     displayOn设置Screen: "chat",
                 //     defaultValue: null,
                 //     scope: "chat",
                 //     renderProps: (value) => ({
@@ -51,7 +51,7 @@ export class ContextTrimmerPlugin extends Plugin<ContextTrimmerPluginOptions> {
                 //         max: 10,
                 //         step: 1,
                 //     }),
-                //     displayInQuickSettings: {
+                //     displayInQuick设置: {
                 //         name: "Max Messages",
                 //         displayByDefault: false,
                 //         label: value => `Include ${value ?? 'all'} messages`,
@@ -59,17 +59,17 @@ export class ContextTrimmerPlugin extends Plugin<ContextTrimmerPluginOptions> {
                 // },
                 {
                     id: 'preserveSystemPrompt',
-                    displayOnSettingsScreen: "chat",
+                    displayOn设置Screen: "chat",
                     defaultValue: true,
                     scope: "chat",
                     renderProps: {
-                        label: "Try to always include the System Prompt",
+                        label: "Try to always include the 系统提示词",
                         type: "checkbox",
                     },
                 },
                 {
                     id: 'preserveFirstUserMessage',
-                    displayOnSettingsScreen: "chat",
+                    displayOn设置Screen: "chat",
                     defaultValue: true,
                     scope: "chat",
                     renderProps: {
@@ -81,7 +81,7 @@ export class ContextTrimmerPlugin extends Plugin<ContextTrimmerPluginOptions> {
         };
     }
 
-    async preprocessModelInput(messages: OpenAIMessage[], parameters: Parameters): Promise<{ messages: OpenAIMessage[]; parameters: Parameters; }> {
+    async preprocess模型Input(messages: OpenAIMessage[], parameters: Parameters): Promise<{ messages: OpenAIMessage[]; parameters: Parameters; }> {
         const before = await countTokens(messages);
 
         const options = this.options;

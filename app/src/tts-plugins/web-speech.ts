@@ -1,6 +1,6 @@
 import { Voice } from "../core/tts/types";
 import DirectTTSPlugin from "../core/tts/direct-tts-plugin";
-import { PluginDescription } from "../core/plugins/plugin-description";
+import { Plugin描述 } from "../core/plugins/plugin-description";
 
 export interface WebSpeechPluginOptions {
     voice: string | null;
@@ -24,7 +24,7 @@ export default class WebSpeechPlugin extends DirectTTSPlugin<WebSpeechPluginOpti
         speechSynthesis.onvoiceschanged = () => this.getVoices();
     }
 
-    describe(): PluginDescription {
+    describe(): Plugin描述 {
         const id = "web-speech";
         return {
             id,
@@ -34,7 +34,7 @@ export default class WebSpeechPlugin extends DirectTTSPlugin<WebSpeechPluginOpti
                     id: "voice",
                     defaultValue: null,
 
-                    displayOnSettingsScreen: "speech",
+                    displayOn设置Screen: "speech",
                     displayAsSeparateSection: true,
                     
                     renderProps: (value, options) => ({

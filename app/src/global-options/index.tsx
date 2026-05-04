@@ -17,28 +17,28 @@ export const globalOptions: OptionGroup[] = [
     ttsServiceOptions,
 ];
 
-const optionsForQuickSettings: Option[] = [];
+const optionsForQuick设置: Option[] = [];
 [...globalOptions, ...pluginMetadata].forEach(plugin => {
     plugin.options.forEach(option => {
-        if (option.displayInQuickSettings) {
-            optionsForQuickSettings.push({
+        if (option.displayInQuick设置) {
+            optionsForQuick设置.push({
                 id: plugin.id + "--" + option.id,
-                defaultValue: !!option.displayInQuickSettings?.displayByDefault,
-                displayOnSettingsScreen: "ui",
+                defaultValue: !!option.displayInQuick设置?.displayByDefault,
+                displayOn设置Screen: "ui",
                 displayAsSeparateSection: false,
                 renderProps: {
                     type: 'checkbox',
-                    label: option.displayInQuickSettings?.name || option.id,
+                    label: option.displayInQuick设置?.name || option.id,
                 },
             });
         }
     });
 })
 
-export const quickSettings: OptionGroup = {
+export const quick设置: OptionGroup = {
     id: 'quick-settings',
-    name: "Quick Settings",
-    options: optionsForQuickSettings,
+    name: "Quick 设置",
+    options: optionsForQuick设置,
 }
 
-globalOptions.push(quickSettings);
+globalOptions.push(quick设置);

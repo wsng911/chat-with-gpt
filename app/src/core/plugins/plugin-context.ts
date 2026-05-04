@@ -5,7 +5,7 @@ export interface PluginContext {
     getOptions(): any;
     getCurrentChat(): Chat;
     createChatCompletion(messages: OpenAIMessage[], parameters: Parameters): Promise<string>;
-    setChatTitle(title: string): Promise<void>;
+    setChat标题(title: string): Promise<void>;
 }
 
 export function createBasicPluginContext(pluginID: string, pluginOptions: OptionsManager, chatID?: string | null, chat?: Chat | null) {
@@ -13,6 +13,6 @@ export function createBasicPluginContext(pluginID: string, pluginOptions: Option
         getOptions: (_pluginID = pluginID) => pluginOptions.getAllOptions(_pluginID, chatID),
         getCurrentChat: () => chat,
         createChatCompletion: async () => '',
-        setChatTitle: async (title: string) => { },
+        setChat标题: async (title: string) => { },
     } as PluginContext;
 }

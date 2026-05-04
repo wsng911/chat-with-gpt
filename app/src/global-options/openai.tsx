@@ -7,7 +7,7 @@ export const openAIOptions: OptionGroup = {
         {
             id: 'apiKey',
             defaultValue: "",
-            displayOnSettingsScreen: "user",
+            displayOn设置Screen: "user",
             displayAsSeparateSection: true,
             renderProps: () => ({
                 type: "password",

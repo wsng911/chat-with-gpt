@@ -1,5 +1,5 @@
-import SettingsTab from "./tab";
+import 设置Tab from "./tab";
 
 export default function UIPreferencesTab(props: any) {
-    return <SettingsTab name="ui" />
+    return <设置Tab name="ui" />
 }

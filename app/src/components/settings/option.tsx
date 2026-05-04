@@ -1,4 +1,4 @@
-export default function SettingsOption(props: {
+export default function 设置Option(props: {
     focused?: boolean;
     heading?: string;
     description?: any;
@@ -11,7 +11,7 @@ export default function SettingsOption(props: {
     }
 
     return (
-        <section className={props.focused ? 'focused' : ''}>
+        <section class名称={props.focused ? 'focused' : ''}>
             {props.heading && <h3>{props.heading}</h3>}
             {props.description && <div style={{
                 fontSize: "90%",

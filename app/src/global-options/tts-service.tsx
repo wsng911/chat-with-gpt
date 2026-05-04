@@ -8,7 +8,7 @@ export const ttsServiceOptions: OptionGroup = {
     options: [
         {
             id: 'autoplay',
-            displayOnSettingsScreen: "speech",
+            displayOn设置Screen: "speech",
             defaultValue: false,
             displayAsSeparateSection: true,
             renderProps: {
@@ -18,7 +18,7 @@ export const ttsServiceOptions: OptionGroup = {
         },
         {
             id: 'service',
-            displayOnSettingsScreen: "speech",
+            displayOn设置Screen: "speech",
             defaultValue: "elevenlabs",
             displayAsSeparateSection: true,
             renderProps: {

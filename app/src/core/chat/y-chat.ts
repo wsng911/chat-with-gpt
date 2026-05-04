@@ -22,7 +22,7 @@ export class YChat {
     }
 
     constructor(public readonly id: string, public root: Y.Doc) {
-        this.purgeDeletedValues();
+        this.purge删除dValues();
     }
 
     public observeDeep(callback: any) {
@@ -113,11 +113,11 @@ export class YChat {
             this.content.clear();
             this.done.clear();
         } else {
-            this.purgeDeletedValues();
+            this.purge删除dValues();
         }
     }
 
-    private purgeDeletedValues() {
+    private purge删除dValues() {
         if (this.deleted) {
             if (this.metadata.size > 1) {
                 for (const key of Array.from(this.metadata.keys())) {

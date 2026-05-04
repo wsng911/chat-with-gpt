@@ -1,8 +1,8 @@
-import { Button, Notification } from "@mantine/core";
+import { Button, 否tification } from "@mantine/core";
 import { useCallback } from "react";
 import { useRegisterSW } from "virtual:pwa-register/react";
 
-export function InstallUpdateNotification() {
+export function Install更新否tification() {
   const {
     offlineReady: [_, setOfflineReady],
     needRefresh: [needRefresh, setNeedRefresh],
@@ -16,22 +16,22 @@ export function InstallUpdateNotification() {
     },
   });
 
-  const onClose = () => {
+  const on关闭 = () => {
     setOfflineReady(false);
     setNeedRefresh(false);
   };
 
-  const onUpdate = useCallback(async () => {
+  const on更新 = useCallback(async () => {
     updateServiceWorker(true);
   }, []);
 
   return needRefresh ? (
-    <Notification title="Update available!" onClose={onClose}>
+    <否tification title="更新 available!" on关闭={on关闭}>
       Click{" "}
-      <Button compact onClick={onUpdate}>
-        Update now
+      <Button compact onClick={on更新}>
+        更新 now
       </Button>{" "}
       to get the latest version.
-    </Notification>
+    </否tification>
   ) : null;
 }

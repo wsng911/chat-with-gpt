@@ -72,12 +72,12 @@ declare global {
                 this: SpeechRecognition,
                 ev: SpeechRecognitionEventMap[K]
             ) => any,
-            options?: boolean | AddEventListenerOptions
+            options?: boolean | 添加EventListenerOptions
         ): void
         addEventListener(
             type: string,
             listener: EventListenerOrEventListenerObject,
-            options?: boolean | AddEventListenerOptions
+            options?: boolean | 添加EventListenerOptions
         ): void
         removeEventListener<K extends keyof SpeechRecognitionEventMap>(
             type: K,

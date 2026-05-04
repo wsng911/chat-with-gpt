@@ -10,7 +10,7 @@ export function useOption<T=any>(groupID: string, optionID: string, chatID?: str
 
     const timer = useRef<any>();
 
-    const onUpdate = useCallback((updatedGroupID: string) => {
+    const on更新 = useCallback((updatedGroupID: string) => {
         if (groupID === updatedGroupID) {
             setValue(context.chat.options.getValidatedOption(groupID, optionID, chatID));
             setVersion(v => v + 1);
@@ -24,11 +24,11 @@ export function useOption<T=any>(groupID: string, optionID: string, chatID?: str
     }, [groupID, optionID, chatID]);
 
     useEffect(() => {
-        context.chat.on('plugin-options-update', onUpdate);
+        context.chat.on('plugin-options-update', on更新);
         return () => {
-            context.chat.off('plugin-options-update', onUpdate);
+            context.chat.off('plugin-options-update', on更新);
         };
-    }, [chatID, onUpdate]);
+    }, [chatID, on更新]);
 
     const setOptionValue = useCallback((value: any) => {
         context.chat.options.setOption(groupID, optionID, value, chatID);

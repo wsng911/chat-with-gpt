@@ -19,7 +19,7 @@ export interface Message {
     done?: boolean;
 }
 
-export interface UserSubmittedMessage {
+export interface User提交tedMessage {
     chatID: string;
     parentID?: string;
     content: string;

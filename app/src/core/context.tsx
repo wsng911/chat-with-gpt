@@ -1,7 +1,7 @@
 import React, { useState, useRef, useMemo, useEffect, useCallback } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { IntlShape, useIntl } from "react-intl";
-import { Backend, User } from "./backend";
+import { 返回end, User } from "./backend";
 import { ChatManager } from "./";
 import { useAppDispatch } from "../store";
 import { openOpenAIApiKeyPanel } from "../store/settings-ui";
@@ -23,7 +23,7 @@ export interface Context {
     isHome: boolean;
     isShare: boolean;
     generating: boolean;
-    onNewMessage: (message?: string) => Promise<string | false>;
+    on新建Message: (message?: string) => Promise<string | false>;
     regenerateMessage: (message: Message) => Promise<boolean>;
     editMessage: (message: Message, content: string) => Promise<boolean>;
 }
@@ -31,11 +31,11 @@ export interface Context {
 const AppContext = React.createContext<Context>({} as any);
 
 const chatManager = new ChatManager();
-const backend = new Backend(chatManager);
+const backend = new 返回end(chatManager);
 
 let intl: IntlShape;
 
-export function useCreateAppContext(): Context {
+export function use创建AppContext(): Context {
     const { id: _id } = useParams();
     const [nextID, setNextID] = useState(uuidv4());
     const id = _id ?? nextID;
@@ -53,7 +53,7 @@ export function useCreateAppContext(): Context {
     const [wasAuthenticated, setWasAuthenticated] = useState(backend?.isAuthenticated || false);
 
     useEffect(() => {
-        chatManager.on('y-update', update => backend?.receiveYUpdate(update))
+        chatManager.on('y-update', update => backend?.receiveY更新(update))
     }, []);
 
     const updateAuth = useCallback((authenticated: boolean) => {
@@ -75,7 +75,7 @@ export function useCreateAppContext(): Context {
         };
     }, [updateAuth]);
 
-    const onNewMessage = useCallback(async (message?: string) => {
+    const on新建Message = useCallback(async (message?: string) => {
         resetAudioContext();
         
         if (isShare) {
@@ -234,10 +234,10 @@ export function useCreateAppContext(): Context {
         isHome,
         isShare,
         generating,
-        onNewMessage,
+        on新建Message,
         regenerateMessage,
         editMessage,
-    }), [authenticated, wasAuthenticated, generating, onNewMessage, regenerateMessage, editMessage, currentChat, id, isHome, isShare, intl]);
+    }), [authenticated, wasAuthenticated, generating, on新建Message, regenerateMessage, editMessage, currentChat, id, isHome, isShare, intl]);
 
     return context;
 }
@@ -246,8 +246,8 @@ export function useAppContext() {
     return React.useContext(AppContext);
 }
 
-export function AppContextProvider(props: { children: React.ReactNode }) {
-    const context = useCreateAppContext();
+export function AppContextProvider(props: { children: React.React否de }) {
+    const context = use创建AppContext();
     return <AppContext.Provider value={context}>
         <TTSContextProvider>
             {props.children}

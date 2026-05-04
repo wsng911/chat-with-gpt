@@ -11,7 +11,7 @@ export class AsyncLoop {
     public cancelled = false;
 
     /**
-     * Creates a new instance of the AsyncLoop class.
+     * 创建s a new instance of the AsyncLoop class.
      * @param {Function} handler - The function to be executed in the loop.
      * @param {number} pauseBetween - The delay (in milliseconds) between each execution of the handler. Default is 1000 ms.
      */

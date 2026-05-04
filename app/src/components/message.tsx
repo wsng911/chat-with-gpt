@@ -10,7 +10,7 @@ import { useAppContext } from '../core/context';
 import { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useAppSelector } from '../store';
-import { selectSettingsTab } from '../store/settings-ui';
+import { select设置Tab } from '../store/settings-ui';
 
 // hide for everyone but screen readers
 const SROnly = styled.span`
@@ -184,7 +184,7 @@ const EndOfChatMarker = styled.div`
     background: rgba(255, 255, 255, 0.1);
 `;
 
-const Editor = styled.div`
+const 编辑or = styled.div`
     max-width: 50rem;
     margin-left: auto;
     margin-right: auto;
@@ -207,15 +207,15 @@ function InlineLoader() {
 
 export default function MessageComponent(props: { message: Message, last: boolean, share?: boolean }) {
     const context = useAppContext();
-    const [editing, setEditing] = useState(false);
+    const [editing, set编辑ing] = useState(false);
     const [content, setContent] = useState('');
     const intl = useIntl();
 
     const [katex] = useOption<boolean>('markdown', 'katex');
 
-    const tab = useAppSelector(selectSettingsTab);
+    const tab = useAppSelector(select设置Tab);
 
-    const getRoleName = useCallback((role: string, share = false) => {
+    const getRole名称 = useCallback((role: string, share = false) => {
         switch (role) {
             case 'user':
                 if (share) {
@@ -239,12 +239,12 @@ export default function MessageComponent(props: { message: Message, last: boolea
         }
 
         return (
-            <Container className={"message by-" + props.message.role}>
-                <div className="inner">
-                    <div className="metadata">
+            <Container class名称={"message by-" + props.message.role}>
+                <div class名称="inner">
+                    <div class名称="metadata">
                         <span>
                             <strong>
-                                {getRoleName(props.message.role, props.share)}{props.message.model === 'gpt-4' && ' (GPT 4)'}<SROnly>:</SROnly>
+                                {getRole名称(props.message.role, props.share)}{props.message.model === 'gpt-4' && ' (GPT 4)'}<SROnly>:</SROnly>
                             </strong>
                             {props.message.role === 'assistant' && props.last && !props.message.done && <InlineLoader />}
                         </span>
@@ -256,7 +256,7 @@ export default function MessageComponent(props: { message: Message, last: boolea
                         <CopyButton value={props.message.content}>
                             {({ copy, copied }) => (
                                 <Button variant="subtle" size="sm" compact onClick={copy} style={{ marginLeft: '1rem' }}>
-                                    <i className="fa fa-clipboard" />
+                                    <i class名称="fa fa-clipboard" />
                                         {copied ? <FormattedMessage defaultMessage="Copied" description="Label for copy-to-clipboard button after a successful copy" />
                                         : <span><FormattedMessage defaultMessage="Copy" description="Label for copy-to-clipboard button" /></span>}
                                 </Button>
@@ -264,7 +264,7 @@ export default function MessageComponent(props: { message: Message, last: boolea
                         </CopyButton>
                         {typeof navigator.share !== 'undefined' && (
                             <Button variant="subtle" size="sm" compact onClick={() => share(props.message.content)}>
-                                <i className="fa fa-share" />
+                                <i class名称="fa fa-share" />
                                 <span>
                                     <FormattedMessage defaultMessage="Share" description="Label for a button which shares the text of a chat message using the user device's share functionality" />
                                 </span>
@@ -273,38 +273,38 @@ export default function MessageComponent(props: { message: Message, last: boolea
                         {!context.isShare && props.message.role === 'user' && (
                             <Button variant="subtle" size="sm" compact onClick={() => {
                                 setContent(props.message.content);
-                                setEditing(v => !v);
+                                set编辑ing(v => !v);
                             }}>
-                                <i className="fa fa-edit" />
+                                <i class名称="fa fa-edit" />
                                 <span>
-                                    {editing ? <FormattedMessage defaultMessage="Cancel" description="Label for a button that appears when the user is editing the text of one of their messages, to cancel without saving changes" />
-                                        : <FormattedMessage defaultMessage="Edit" description="Label for the button the user can click to edit the text of one of their messages" />}
+                                    {editing ? <FormattedMessage defaultMessage="取消" description="Label for a button that appears when the user is editing the text of one of their messages, to cancel without saving changes" />
+                                        : <FormattedMessage defaultMessage="编辑" description="Label for the button the user can click to edit the text of one of their messages" />}
                                 </span>
                             </Button>
                         )}
                         {!context.isShare && props.message.role === 'assistant' && (
                             <Button variant="subtle" size="sm" compact onClick={() => context.regenerateMessage(props.message)}>
-                                <i className="fa fa-refresh" />
+                                <i class名称="fa fa-refresh" />
                                 <span>
-                                    <FormattedMessage defaultMessage="Regenerate" description="Label for the button used to ask the AI to regenerate one of its messages. Since message generations are stochastic, the resulting message will be different." />
+                                    <FormattedMessage defaultMessage="重新生成" description="Label for the button used to ask the AI to regenerate one of its messages. Since message generations are stochastic, the resulting message will be different." />
                                 </span>
                             </Button>
                         )}
                     </div>
                     {!editing && <Markdown content={props.message.content}
                         katex={katex}
-                        className={"content content-" + props.message.id} />}
-                    {editing && (<Editor>
+                        class名称={"content content-" + props.message.id} />}
+                    {editing && (<编辑or>
                         <Textarea value={content}
                             onChange={e => setContent(e.currentTarget.value)}
                             autosize={true} />
                         <Button variant="light" onClick={() => context.editMessage(props.message, content)}>
-                            <FormattedMessage defaultMessage="Save changes" description="Label for a button that appears when the user is editing the text of one of their messages, to save the changes" />
+                            <FormattedMessage defaultMessage="保存 changes" description="Label for a button that appears when the user is editing the text of one of their messages, to save the changes" />
                         </Button>
-                        <Button variant="subtle" onClick={() => setEditing(false)}>
-                            <FormattedMessage defaultMessage="Cancel" description="Label for a button that appears when the user is editing the text of one of their messages, to cancel without saving changes" />
+                        <Button variant="subtle" onClick={() => set编辑ing(false)}>
+                            <FormattedMessage defaultMessage="取消" description="Label for a button that appears when the user is editing the text of one of their messages, to cancel without saving changes" />
                         </Button>
-                    </Editor>)}
+                    </编辑or>)}
                 </div>
                 {props.last && <EndOfChatMarker />}
             </Container>

@@ -1,21 +1,21 @@
 import { Message } from "./types";
 
 /**
- * MessageNode interface that extends the Message type and includes parent and replies properties.
+ * Message否de interface that extends the Message type and includes parent and replies properties.
  * This allows creating a tree structure from messages.
  */
-export interface MessageNode extends Message {
-    parent: MessageNode | null;
-    replies: Set<MessageNode>;
+export interface Message否de extends Message {
+    parent: Message否de | null;
+    replies: Set<Message否de>;
 }
 
 /**
- * Function to create a new MessageNode from a given message.
+ * Function to create a new Message否de from a given message.
  *
- * @param {Message} message - The message to be converted to a MessageNode.
- * @returns {MessageNode} - The newly created MessageNode.
+ * @param {Message} message - The message to be converted to a Message否de.
+ * @returns {Message否de} - The newly created Message否de.
  */
-export function createMessageNode(message: Message): MessageNode {
+export function createMessage否de(message: Message): Message否de {
     return {
         ...message,
         parent: null,
@@ -25,43 +25,43 @@ export function createMessageNode(message: Message): MessageNode {
 
 /**
  * MessageTree class for representing and managing a tree structure of messages.
- * The tree is made up of MessageNode objects, which extend the `Message` type and can have parent and replies relationships.
+ * The tree is made up of Message否de objects, which extend the `Message` type and can have parent and replies relationships.
  * The purpose of the tree structure is to represent a hierarchy of messages, where one message might have multiple
  * replies, and each reply has a parent message that it is replying to.
  */
 
 export class MessageTree {
-    public messageNodes: Map<string, MessageNode> = new Map(); // TODO make private
+    public message否des: Map<string, Message否de> = new Map(); // TODO make private
 
-    constructor(messages: (Message | MessageNode)[] = []) {
+    constructor(messages: (Message | Message否de)[] = []) {
         this.addMessages(messages);
     }
 
     /**
      * Getter method for retrieving root messages (messages without a parent) in the tree.
-     * @returns {MessageNode[]} - An array of root messages.
+     * @returns {Message否de[]} - An array of root messages.
      */
-    public get roots(): MessageNode[] {
-        return Array.from(this.messageNodes.values())
-            .filter((messageNode) => messageNode.parent === null);
+    public get roots(): Message否de[] {
+        return Array.from(this.message否des.values())
+            .filter((message否de) => message否de.parent === null);
     }
 
     /**
      * Getter method for retrieving leaf messages (messages without any replies) in the tree.
-     * @returns {MessageNode[]} - An array of leaf messages.
+     * @returns {Message否de[]} - An array of leaf messages.
      */
-    public get leafs(): MessageNode[] {
-        return Array.from(this.messageNodes.values())
-            .filter((messageNode) => messageNode.replies.size === 0);
+    public get leafs(): Message否de[] {
+        return Array.from(this.message否des.values())
+            .filter((message否de) => message否de.replies.size === 0);
     }
 
     /**
      * Getter method for retrieving the first message in the most recent message chain.
-     * @returns {MessageNode | null} - The first message in the most recent message chain, or null if the tree is empty.
+     * @returns {Message否de | null} - The first message in the most recent message chain, or null if the tree is empty.
      */
-    public get first(): MessageNode | null {
+    public get first(): Message否de | null {
         const leaf = this.mostRecentLeaf();
-        let first: MessageNode | null = leaf;
+        let first: Message否de | null = leaf;
         while (first?.parent) {
             first = first.parent;
         }
@@ -71,10 +71,10 @@ export class MessageTree {
     /**
      * Method to get a message node from the tree by its ID.
      * @param {string} id - The ID of the message node to retrieve.
-     * @returns {MessageNode | null} - The message node with the given ID, or null if it does not exist in the tree.
+     * @returns {Message否de | null} - The message node with the given ID, or null if it does not exist in the tree.
      */
-    public get(id: string): MessageNode | null {
-        return this.messageNodes.get(id) || null;
+    public get(id: string): Message否de | null {
+        return this.message否des.get(id) || null;
     }
 
     /**
@@ -88,33 +88,33 @@ export class MessageTree {
             done: typeof done === 'boolean' ? done : inputMessage.done,
         };
 
-        if (this.messageNodes.get(message.id)?.content) {
+        if (this.message否des.get(message.id)?.content) {
             return;
         }
 
-        const messageNode = createMessageNode(message);
+        const message否de = createMessage否de(message);
 
-        this.messageNodes.set(messageNode.id, messageNode);
+        this.message否des.set(message否de.id, message否de);
 
-        if (messageNode.parentID) {
-            let parent = this.messageNodes.get(messageNode.parentID);
+        if (message否de.parentID) {
+            let parent = this.message否des.get(message否de.parentID);
 
             if (!parent) {
-                parent = createMessageNode({
-                    id: messageNode.parentID,
+                parent = createMessage否de({
+                    id: message否de.parentID,
                 } as Message);
 
-                this.messageNodes.set(parent.id, parent);
+                this.message否des.set(parent.id, parent);
             }
 
-            parent.replies.add(messageNode);
-            messageNode.parent = parent;
+            parent.replies.add(message否de);
+            message否de.parent = parent;
         }
 
-        for (const other of Array.from(this.messageNodes.values())) {
-            if (other.parentID === messageNode.id) {
-                messageNode.replies.add(other);
-                other.parent = messageNode;
+        for (const other of Array.from(this.message否des.values())) {
+            if (other.parentID === message否de.id) {
+                message否de.replies.add(other);
+                other.parent = message否de;
             }
         }
     }
@@ -138,24 +138,24 @@ export class MessageTree {
      * @param {Message} message - The updated message.
      */
     public updateMessage(message: Message): void {
-        const messageNode = this.messageNodes.get(message.id);
+        const message否de = this.message否des.get(message.id);
 
-        if (!messageNode) {
+        if (!message否de) {
             return;
         }
 
-        messageNode.content = message.content;
-        messageNode.timestamp = message.timestamp;
-        messageNode.done = message.done;
+        message否de.content = message.content;
+        message否de.timestamp = message.timestamp;
+        message否de.done = message.done;
     }
 
     /**
      * Method to get the message chain leading to a specific message by its ID.
      * @param {string} messageID - The ID of the target message.
-     * @returns {MessageNode[]} - An array of message nodes in the chain leading to the target message.
+     * @returns {Message否de[]} - An array of message nodes in the chain leading to the target message.
      */
-    public getMessageChainTo(messageID: string): MessageNode[] {
-        const message = this.messageNodes.get(messageID);
+    public getMessageChainTo(messageID: string): Message否de[] {
+        const message = this.message否des.get(messageID);
 
         if (!message) {
             return [];
@@ -175,12 +175,12 @@ export class MessageTree {
 
     /**
      * Method to serialize the message tree into an array of message nodes, excluding parent and replies properties.
-     * @returns {Omit<MessageNode, 'parent' | 'replies'>[]} - An array of serialized message nodes.
+     * @returns {Omit<Message否de, 'parent' | 'replies'>[]} - An array of serialized message nodes.
      */
-    public serialize(): Omit<MessageNode, 'parent' | 'replies'>[] {
-        return Array.from(this.messageNodes.values())
-            .map((messageNode) => {
-                const n: any = { ...messageNode };
+    public serialize(): Omit<Message否de, 'parent' | 'replies'>[] {
+        return Array.from(this.message否des.values())
+            .map((message否de) => {
+                const n: any = { ...message否de };
                 delete n.parent;
                 delete n.replies;
                 return n;
@@ -189,9 +189,9 @@ export class MessageTree {
 
     /**
      * Method to get the most recent leaf message in the message tree.
-     * @returns {MessageNode | null} - The most recent leaf message, or null if the tree is empty.
+     * @returns {Message否de | null} - The most recent leaf message, or null if the tree is empty.
      */
-    public mostRecentLeaf(): MessageNode | null {
+    public mostRecentLeaf(): Message否de | null {
         return this.leafs.sort((a, b) => b.timestamp - a.timestamp)[0] || null;
     }
 }

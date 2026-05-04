@@ -126,7 +126,7 @@ function HeaderButton(props: ButtonProps & { icon?: string, onClick?: any, child
         <Button size='xs'
             variant={props.variant || 'subtle'}
             onClick={props.onClick}>
-            {props.icon && <i className={'fa fa-' + props.icon} />}
+            {props.icon && <i class名称={'fa fa-' + props.icon} />}
             {props.children && <span>
                 {props.children}
             </span>}
@@ -154,17 +154,17 @@ export default function Header(props: HeaderProps) {
     const onBurgerClick = useCallback(() => dispatch(toggleSidebar()), [dispatch]);
 
     const burgerLabel = sidebarOpen
-        ? intl.formatMessage({ defaultMessage: "Close sidebar" })
+        ? intl.formatMessage({ defaultMessage: "关闭 sidebar" })
         : intl.formatMessage({ defaultMessage: "Open sidebar" });
 
-    const onNewChat = useCallback(async () => {
+    const on新建Chat = useCallback(async () => {
         setLoading(true);
         navigate(`/`);
         setLoading(false);
         setTimeout(() => document.querySelector<HTMLTextAreaElement>('#message-input')?.focus(), 100);
     }, [navigate]);
 
-    const openSettings = useCallback(() => {
+    const open设置 = useCallback(() => {
         dispatch(setTab(openAIApiKey ? 'chat' : 'user'));
     }, [openAIApiKey, dispatch]);
 
@@ -185,14 +185,14 @@ export default function Header(props: HeaderProps) {
     }, [dispatch])
 
     useHotkeys([
-        ['c', onNewChat],
+        ['c', on新建Chat],
     ]);
 
     const header = useMemo(() => (<>
         {context.sessionExpired && <Banner onClick={signIn}>
             You have been signed out. Click here to sign back in.
         </Banner>}
-        <HeaderContainer className={context.isHome ? 'shaded' : ''}>
+        <HeaderContainer class名称={context.isHome ? 'shaded' : ''}>
             <Helmet>
                 <title>
                     {props.title ? `${props.title} - ` : ''}
@@ -201,26 +201,26 @@ export default function Header(props: HeaderProps) {
             </Helmet>
             {!sidebarOpen && <Burger opened={sidebarOpen} onClick={onBurgerClick} aria-label={burgerLabel} transitionDuration={0} />}
             {context.isHome && <h2>{intl.formatMessage({ defaultMessage: "Chat with GPT", description: "app name" })}</h2>}
-            <div className="spacer" />
+            <div class名称="spacer" />
             <HeaderButton icon="search" onClick={spotlight.openSpotlight} />
-            <HeaderButton icon="gear" onClick={openSettings} />
+            <HeaderButton icon="gear" onClick={open设置} />
             {backend.current && !props.share && props.canShare && typeof navigator.share !== 'undefined' && <HeaderButton icon="share" onClick={props.onShare}>
                 <FormattedMessage defaultMessage="Share" description="Label for the button used to create a public share URL for a chat log" />
             </HeaderButton>}
             {backend.current && !context.authenticated && (
                 <HeaderButton onClick={localStorage.getItem('registered') ? signIn : signUp}>
-                    <FormattedMessage defaultMessage="Sign in <h>to sync</h>"
+                    <FormattedMessage defaultMessage="登录 <h>to sync</h>"
                         description="Label for sign in button, which indicates that the purpose of signing in is to sync your data between devices. Less important text inside <h> tags is hidden on small screens."
                         values={{
-                            h: (chunks: any) => <span className="hide-on-mobile">{chunks}</span>
+                            h: (chunks: any) => <span class名称="hide-on-mobile">{chunks}</span>
                         }} />
                 </HeaderButton>
             )}
-            <HeaderButton icon="plus" onClick={onNewChat} loading={loading} variant="light">
-                <FormattedMessage defaultMessage="New Chat" description="Label for the button used to start a new chat session" />
+            <HeaderButton icon="plus" onClick={on新建Chat} loading={loading} variant="light">
+                <FormattedMessage defaultMessage="新建 Chat" description="Label for the button used to start a new chat session" />
             </HeaderButton>
         </HeaderContainer>
-    </>), [sidebarOpen, onBurgerClick, props.title, props.share, props.canShare, props.onShare, openSettings, onNewChat, 
+    </>), [sidebarOpen, onBurgerClick, props.title, props.share, props.canShare, props.onShare, open设置, on新建Chat, 
         loading, context.authenticated, context.sessionExpired, context.isHome, context.isShare, spotlight.openSpotlight, signIn, signUp]);
 
     return header;
@@ -229,7 +229,7 @@ export default function Header(props: HeaderProps) {
 function SubHeaderMenuItem(props: { item: MenuItem }) {
     return (
         <Button variant="subtle" size="sm" compact component={Link} to={props.item.link} target="_blank" key={props.item.link}>
-            {props.item.icon && <i className={'fa fa-' + props.item.icon} />}
+            {props.item.icon && <i class名称={'fa fa-' + props.item.icon} />}
             <span>{props.item.label}</span>
         </Button>
     );
@@ -238,7 +238,7 @@ function SubHeaderMenuItem(props: { item: MenuItem }) {
 export function SubHeader(props: any) {
     const elem = useMemo(() => (
         <SubHeaderContainer>
-            <div className="spacer" />
+            <div class名称="spacer" />
             {secondaryMenu.map(item => <SubHeaderMenuItem item={item} key={item.link} />)}
         </SubHeaderContainer>
     ), []);

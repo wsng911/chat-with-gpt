@@ -1,6 +1,6 @@
 import { OpenAIMessage, Parameters } from "../chat/types";
 import { PluginContext } from "./plugin-context";
-import { PluginDescription } from "./plugin-description";
+import { Plugin描述 } from "./plugin-description";
 
 export default class Plugin<T=any> {
     constructor(public context?: PluginContext) {
@@ -9,7 +9,7 @@ export default class Plugin<T=any> {
     async initialize() {
     }
 
-    describe(): PluginDescription {
+    describe(): Plugin描述 {
         throw new Error('not implemented');
     }
 
@@ -17,14 +17,14 @@ export default class Plugin<T=any> {
         return this.context?.getOptions();
     }
 
-    async preprocessModelInput(messages: OpenAIMessage[], parameters: Parameters): Promise<{
+    async preprocess模型Input(messages: OpenAIMessage[], parameters: Parameters): Promise<{
         messages: OpenAIMessage[],
         parameters: Parameters,
     }> {
         return { messages, parameters };
     }
 
-    async postprocessModelOutput(message: OpenAIMessage, context: OpenAIMessage[], parameters: Parameters, done: boolean): Promise<OpenAIMessage> {
+    async postprocess模型Output(message: OpenAIMessage, context: OpenAIMessage[], parameters: Parameters, done: boolean): Promise<OpenAIMessage> {
         return message;
     }
 }

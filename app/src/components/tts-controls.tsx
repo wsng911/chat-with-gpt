@@ -105,24 +105,24 @@ export default function AudioControls(props: any) {
 
     return (
         <Container>
-            <div className="buttons">
+            <div class名称="buttons">
                 <ActionIcon onClick={handleJumpToStart} variant='light' color='blue'>
-                    <i className="fa fa-fast-backward" />
+                    <i class名称="fa fa-fast-backward" />
                 </ActionIcon>
                 <ActionIcon onClick={handlePrevious}  variant='light' color='blue' disabled={state?.index === 0}>
-                    <i className="fa fa-step-backward" />
+                    <i class名称="fa fa-step-backward" />
                 </ActionIcon>
                 <ActionIcon onClick={handlePlayPause}  variant='light' color='blue'>
-                    <i className={state?.playing ? 'fa fa-pause' : 'fa fa-play'} />
+                    <i class名称={state?.playing ? 'fa fa-pause' : 'fa fa-play'} />
                 </ActionIcon>
                 <ActionIcon onClick={handleNext}  variant='light' color='blue' disabled={!state || (state.index === state.length - 1)}>
-                    <i className="fa fa-step-forward" />
+                    <i class名称="fa fa-step-forward" />
                 </ActionIcon>
                 <ActionIcon onClick={handleJumpToEnd}  variant='light' color='blue'>
-                    <i className="fa fa-fast-forward" />
+                    <i class名称="fa fa-fast-forward" />
                 </ActionIcon>
                 <ActionIcon onClick={cancel}  variant='light' color='blue'>
-                    <i className="fa fa-close" />
+                    <i class名称="fa fa-close" />
                 </ActionIcon>
             </div>
         </Container>

@@ -11,10 +11,10 @@ export function useChatSpotlightProps() {
     const [version, setVersion] = useState(0);
 
     useEffect(() => {
-        const handleUpdate = () => setVersion(v => v + 1);
-        chat.on('update', handleUpdate);
+        const handle更新 = () => setVersion(v => v + 1);
+        chat.on('update', handle更新);
         return () => {
-            chat.off('update', handleUpdate);
+            chat.off('update', handle更新);
         };
     }, [chat]);
 
@@ -29,8 +29,8 @@ export function useChatSpotlightProps() {
     const props = useMemo(() => ({
         shortcut: ['/'],
         overlayColor: '#000000',
-        searchPlaceholder: intl.formatMessage({ defaultMessage: 'Search your chats' }),
-        searchIcon: <i className="fa fa-search" />,
+        searchPlaceholder: intl.formatMessage({ defaultMessage: '搜索 your chats' }),
+        searchIcon: <i class名称="fa fa-search" />,
         actions: search,
         filter: (query, items) => items,
     }), [search]);

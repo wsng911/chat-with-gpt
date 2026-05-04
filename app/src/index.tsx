@@ -66,7 +66,7 @@ async function bootstrapApplication() {
     try {
         messages = await loadLocaleData(locale.toLocaleLowerCase());
     } catch (e) {
-        console.warn("No locale data for", locale);
+        console.warn("否 locale data for", locale);
     }
 
     root.render(

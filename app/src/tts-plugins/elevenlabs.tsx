@@ -1,5 +1,5 @@
 import { FormattedMessage } from "react-intl";
-import { PluginDescription } from "../core/plugins/plugin-description";
+import { Plugin描述 } from "../core/plugins/plugin-description";
 import TTSPlugin from "../core/tts/tts-plugin";
 import { Voice } from "../core/tts/types";
 import { defaultElevenLabsVoiceID, defaultVoiceList } from "./elevenlabs-defaults";
@@ -58,7 +58,7 @@ export default class ElevenLabsPlugin extends TTSPlugin<ElevenLabsPluginOptions>
      * rules, which are used to render the plugin's settings on the user interface and ensure proper
      * configuration.
      */
-    describe(): PluginDescription {
+    describe(): Plugin描述 {
         return {
             id: "elevenlabs",
             name: "ElevenLabs Text-to-Speech",
@@ -67,7 +67,7 @@ export default class ElevenLabsPlugin extends TTSPlugin<ElevenLabsPluginOptions>
                     id: "apiKey",
                     defaultValue: null,
 
-                    displayOnSettingsScreen: "speech",
+                    displayOn设置Screen: "speech",
                     displayAsSeparateSection: true,
                     resettable: false,
 
@@ -84,7 +84,7 @@ export default class ElevenLabsPlugin extends TTSPlugin<ElevenLabsPluginOptions>
                                     }} />
                             </p>
                             <p>
-                                <FormattedMessage defaultMessage="You can find your API key by clicking your avatar or initials in the top right of the ElevenLabs website, then clicking Profile. Your API key is stored only on this device and never transmitted to anyone except ElevenLabs." />
+                                <FormattedMessage defaultMessage="You can find your API key by clicking your avatar or initials in the top right of the ElevenLabs website, then clicking 个人资料. Your API key is stored only on this device and never transmitted to anyone except ElevenLabs." />
                             </p>
                         </>,
                         hidden: options.getOption('tts', 'service') !== 'elevenlabs',
@@ -94,7 +94,7 @@ export default class ElevenLabsPlugin extends TTSPlugin<ElevenLabsPluginOptions>
                     id: "voice",
                     defaultValue: defaultElevenLabsVoiceID,
 
-                    displayOnSettingsScreen: "speech",
+                    displayOn设置Screen: "speech",
                     displayAsSeparateSection: true,
 
                     renderProps: (value, options, context) => {
@@ -119,7 +119,7 @@ export default class ElevenLabsPlugin extends TTSPlugin<ElevenLabsPluginOptions>
                 {
                     id: "customVoiceID",
                     defaultValue: null,
-                    displayOnSettingsScreen: "speech",
+                    displayOn设置Screen: "speech",
                     renderProps: (value, options, context) => {
                         return {
                             type: "text",
@@ -175,7 +175,7 @@ export default class ElevenLabsPlugin extends TTSPlugin<ElevenLabsPluginOptions>
             };
         }
 
-        // Search for a matching voice object
+        // 搜索 for a matching voice object
         const voice = ElevenLabsPlugin.voices.find(v => v.id === voiceID);
         if (voice) {
             return voice;
@@ -218,7 +218,7 @@ export default class ElevenLabsPlugin extends TTSPlugin<ElevenLabsPluginOptions>
     }
 
     /**
-     * Creates and returns the headers required for ElevenLabs API requests.
+     * 创建s and returns the headers required for ElevenLabs API requests.
      */
     private createHeaders(): Record<string, string> {
         const headers: Record<string, string> = {

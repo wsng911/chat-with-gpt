@@ -5,7 +5,7 @@ import { useCallback, useEffect } from 'react';
 import UserOptionsTab from './user';
 import ChatOptionsTab from './chat';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { closeSettingsUI, selectSettingsOption, selectSettingsTab, setTab } from '../../store/settings-ui';
+import { close设置UI, select设置Option, select设置Tab, setTab } from '../../store/settings-ui';
 import SpeechOptionsTab from './speech';
 import { FormattedMessage } from 'react-intl';
 import UIPreferencesTab from './ui-preferences';
@@ -72,16 +72,16 @@ const Container = styled.div`
     }
 `;
 
-export interface SettingsDrawerProps {
+export interface 设置DrawerProps {
 }
 
-export default function SettingsDrawer(props: SettingsDrawerProps) {
-    const tab = useAppSelector(selectSettingsTab);
-    const option = useAppSelector(selectSettingsOption);
+export default function 设置Drawer(props: 设置DrawerProps) {
+    const tab = useAppSelector(select设置Tab);
+    const option = useAppSelector(select设置Option);
     const small = useMediaQuery('(max-width: 40em)');
 
     const dispatch = useAppDispatch();
-    const close = useCallback(() => dispatch(closeSettingsUI()), [dispatch]);
+    const close = useCallback(() => dispatch(close设置UI()), [dispatch]);
     const onTabChange = useCallback((tab: string) => dispatch(setTab(tab)), [dispatch]);
 
     useEffect(() => {
@@ -94,10 +94,10 @@ export default function SettingsDrawer(props: SettingsDrawerProps) {
         <Drawer size="50rem"
             position='right'
             opened={!!tab}
-            onClose={close}
+            on关闭={close}
             transition="slide-left"
             transitionDuration={200}
-            withCloseButton={false}>
+            with关闭Button={false}>
             <Container>
                 <Tabs value={tab} onTabChange={onTabChange} style={{ margin: '0rem' }}>
                     <Tabs.List grow={small}>
@@ -113,8 +113,8 @@ export default function SettingsDrawer(props: SettingsDrawerProps) {
                 </Tabs>
                 <div id="save">
                     <Button variant="light" fullWidth size="md" onClick={close}>
-                        <FormattedMessage defaultMessage={"Save and Close"} 
-                            description="Label for the button that closes the Settings screen, saving any changes"
+                        <FormattedMessage defaultMessage={"保存 and 关闭"} 
+                            description="Label for the button that closes the 设置 screen, saving any changes"
                             />
                     </Button>
                 </div>

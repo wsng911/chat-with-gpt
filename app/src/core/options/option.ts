@@ -19,14 +19,14 @@ export interface Option {
     defaultValue: any;
     scope?: 'chat' | 'user' | 'browser';
     
-    displayOnSettingsScreen: 'speech' | 'chat' | 'plugins' | 'ui' | 'user';
+    displayOn设置Screen: 'speech' | 'chat' | 'plugins' | 'ui' | 'user';
     displayAsSeparateSection?: boolean;
     resettable?: boolean;
 
     renderProps: RenderProps | RenderPropsBuilder;
     validate?: (value: any, options: OptionsManager) => boolean;
 
-    displayInQuickSettings?: {
+    displayInQuick设置?: {
         name: string;
         displayByDefault?: boolean;
         label: string | ((value: any, options: OptionsManager, context: Context) => string);

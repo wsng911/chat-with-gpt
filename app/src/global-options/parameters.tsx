@@ -1,4 +1,4 @@
-import { defaultModel } from "../core/chat/openai";
+import { default模型 } from "../core/chat/openai";
 import { OptionGroup } from "../core/options/option-group";
 
 export const parameterOptions: OptionGroup = {
@@ -6,22 +6,22 @@ export const parameterOptions: OptionGroup = {
     options: [
         {
             id: "model",
-            defaultValue: defaultModel,
+            defaultValue: default模型,
             resettable: false,
             scope: "user",
-            displayOnSettingsScreen: "chat",
+            displayOn设置Screen: "chat",
             displayAsSeparateSection: true,
-            displayInQuickSettings: {
-                name: "Model",
+            displayInQuick设置: {
+                name: "模型",
                 displayByDefault: true,
                 label: (value) => value,
             },
             renderProps: (value, options, context) => ({
                 type: "select",
-                label: "Model",
+                label: "模型",
                 description: value?.includes('32') && context.intl.formatMessage(
                     {
-                        defaultMessage: "Note: This model will only work if your OpenAI account has been granted you have been given access to it. <a>Request access here.</a>",
+                        defaultMessage: "否te: This model will only work if your OpenAI account has been granted you have been given access to it. <a>Request access here.</a>",
                     },
                     { 
                         a: (text: string) => <a href="https://openai.com/waitlist/gpt-4-api" target="_blank" rel="noreferer">{text}</a> 
@@ -70,9 +70,9 @@ export const parameterOptions: OptionGroup = {
             defaultValue: 0.5,
             resettable: true,
             scope: "chat",
-            displayOnSettingsScreen: "chat",
+            displayOn设置Screen: "chat",
             displayAsSeparateSection: true,
-            displayInQuickSettings: {
+            displayInQuick设置: {
                 name: "Temperature",
                 displayByDefault: false,
                 label: (value) => "Temperature: " + value.toFixed(1),

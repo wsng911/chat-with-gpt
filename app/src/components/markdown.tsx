@@ -52,7 +52,7 @@ const ImagePreview = styled.div`
 
 export interface MarkdownProps {
     content: string;
-    className?: string;
+    class名称?: string;
     katex? : boolean;
 }
 
@@ -62,12 +62,12 @@ export function Markdown(props: MarkdownProps) {
     const classes = useMemo(() => {
         const classes = ['prose', 'dark:prose-invert'];
 
-        if (props.className) {
-            classes.push(props.className);
+        if (props.class名称) {
+            classes.push(props.class名称);
         }
 
         return classes;
-    }, [props.className])
+    }, [props.class名称])
 
     const elem = useMemo(() => {
         const remarkPlugins: any[] = [remarkGfm];
@@ -78,7 +78,7 @@ export function Markdown(props: MarkdownProps) {
           rehypePlugins.push(rehypeKatex);
         }
       
-        return <div className={classes.join(' ')}>
+        return <div class名称={classes.join(' ')}>
             <ReactMarkdown
                 remarkPlugins={remarkPlugins}
                 rehypePlugins={rehypePlugins}
@@ -88,8 +88,8 @@ export function Markdown(props: MarkdownProps) {
                             {children}
                         </ol>;
                     },
-                    code({ node, inline, className, children, ...props }) {
-                        const match = /language-(\w+)/.exec(className || '')
+                    code({ node, inline, class名称, children, ...props }) {
+                        const match = /language-(\w+)/.exec(class名称 || '')
                         const code = String(children);
                         return !inline ? (<>
                             <Code>
@@ -103,14 +103,14 @@ export function Markdown(props: MarkdownProps) {
                                             a.download = 'image.svg';
                                             a.click();
                                         }}>
-                                            <i className="fa fa-download" />
+                                            <i class名称="fa fa-download" />
                                             <span><FormattedMessage defaultMessage="Download SVG" /></span>
                                         </Button>
                                     )}
                                     <CopyButton value={code}>
                                         {({ copy, copied }) => (
                                             <Button variant="subtle" size="sm" compact onClick={copy}>
-                                                <i className="fa fa-clipboard" />
+                                                <i class名称="fa fa-clipboard" />
                                                 <span>
                                                     {copied ? <FormattedMessage defaultMessage="Copied" description="Label for copy-to-clipboard button after a successful copy" />
                                                         : <FormattedMessage defaultMessage="Copy" description="Label for copy-to-clipboard button" />}
@@ -132,7 +132,7 @@ export function Markdown(props: MarkdownProps) {
                                 </ImagePreview>
                             )}
                         </>) : (
-                            <code className={className} {...props}>
+                            <code class名称={class名称} {...props}>
                                 {children}
                             </code>
                         )

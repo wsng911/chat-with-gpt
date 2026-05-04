@@ -27,7 +27,7 @@ export function ellipsize(text: string, maxLength: number): string {
 }
 
 /**
- * Creates a deep clone of the given ArrayBuffer.
+ * 创建s a deep clone of the given ArrayBuffer.
  *
  * @export
  * @param {ArrayBuffer} buffer - The ArrayBuffer to clone.

@@ -1,8 +1,8 @@
 import Plugin from "../core/plugins";
-import { PluginDescription } from "../core/plugins/plugin-description";
+import { Plugin描述 } from "../core/plugins/plugin-description";
 import { OpenAIMessage, Parameters } from "../core/chat/types";
 import { countTokens, runChatTrimmer } from "../core/tokenizer/wrapper";
-import { defaultModel } from "../core/chat/openai";
+import { default模型 } from "../core/chat/openai";
 
 export const systemPrompt = `
 Please read the following exchange and write a short, concise title describing the topic (in the user's language).
@@ -13,25 +13,25 @@ export const systemPromptForLongExchanges = `
 Please read the following exchange and write a short, concise title describing the topic (in the user's language).
 `.trim();
 
-export interface TitlePluginOptions {
+export interface 标题PluginOptions {
 }
 
 const userPrompt = (messages: OpenAIMessage[]) => {
     return messages.map(m => `${m.role.toLocaleUpperCase()}:\n${m.content}`)
         .join("\n===\n")
-        + "\n===\nTitle:";
+        + "\n===\n标题:";
 }
 
-export class TitlePlugin extends Plugin<TitlePluginOptions> {
-    describe(): PluginDescription {
+export class 标题Plugin extends Plugin<标题PluginOptions> {
+    describe(): Plugin描述 {
         return {
             id: "titles",
-            name: "Title Generator",
+            name: "标题 Generator",
             options: [],
         };
     }
 
-    async postprocessModelOutput(message: OpenAIMessage, contextMessages: OpenAIMessage[], parameters: Parameters, done: boolean): Promise<OpenAIMessage> {
+    async postprocess模型Output(message: OpenAIMessage, contextMessages: OpenAIMessage[], parameters: Parameters, done: boolean): Promise<OpenAIMessage> {
         if (done && !this.context?.getCurrentChat().title) {
             (async () => {
                 let messages = [
@@ -59,7 +59,7 @@ export class TitlePlugin extends Plugin<TitlePluginOptions> {
                 ]
 
                 const output = await this.context?.createChatCompletion(messages, {
-                    model: defaultModel,
+                    model: default模型,
                     temperature: 0,
                 });
                 
@@ -67,7 +67,7 @@ export class TitlePlugin extends Plugin<TitlePluginOptions> {
                     return;
                 }
 
-                this.context?.setChatTitle(output);
+                this.context?.setChat标题(output);
             })();
         }
         return message;

@@ -17,8 +17,8 @@ function extractTextSegments(element: HTMLElement) {
     const lines: string[] = [];
     const blocks = nodes.filter(node => !node.parentElement?.closest(selector) && node.textContent);
     for (const block of blocks) {
-        const tagName = block.tagName.toLowerCase();
-        if (tagName === 'p' || tagName === 'li' || tagName === 'blockquote') {
+        const tag名称 = block.tag名称.toLowerCase();
+        if (tag名称 === 'p' || tag名称 === 'li' || tag名称 === 'blockquote') {
             const sentences = split(block.textContent!);
             for (const sentence of sentences) {
                 lines.push(sentence.raw.trim());
@@ -156,7 +156,7 @@ export function useTTS() {
     return useContext(TTSContext);
 }
 
-export function TTSContextProvider(props: { children: React.ReactNode }) {
+export function TTSContextProvider(props: { children: React.React否de }) {
     const context = useTTSPlayerState();
     return <TTSContext.Provider value={context}>{props.children}</TTSContext.Provider>;
 }

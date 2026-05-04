@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import { PluginDescription } from "../plugins/plugin-description";
+import { Plugin描述 } from "../plugins/plugin-description";
 import { Option } from "./option";
 import { YChat, YChatDoc } from "../chat/y-chat";
 import { globalOptions } from "../../global-options";
@@ -16,7 +16,7 @@ export class OptionsManager extends EventEmitter {
     private optionGroups: OptionGroup[];
     private optionsCache: Map<string, any> = new Map();
 
-    constructor(private yDoc: YChatDoc, private pluginMetadata: PluginDescription[]) {
+    constructor(private yDoc: YChatDoc, private pluginMetadata: Plugin描述[]) {
         super();
 
         this.optionGroups = [...globalOptions, ...this.pluginMetadata];
@@ -183,11 +183,11 @@ export class OptionsManager extends EventEmitter {
 
         console.log(`setting ${groupID}.${optionID} = ${value} (${typeof value})`)
 
-        // Update cache and emit update event
+        // 更新 cache and emit update event
         this.optionsCache.set(key, value);
         this.emit("update", groupID, optionID);
 
-        // Notify other tabs through the broadcast channel
+        // 否tify other tabs through the broadcast channel
         broadcastChannel.postMessage({ groupID, optionID });
     }
 

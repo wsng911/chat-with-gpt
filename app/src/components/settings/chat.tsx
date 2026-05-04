@@ -1,5 +1,5 @@
-import SettingsTab from "./tab";
+import 设置Tab from "./tab";
 
 export default function ChatOptionsTab(props: any) {
-    return <SettingsTab name="chat" />
+    return <设置Tab name="chat" />
 }

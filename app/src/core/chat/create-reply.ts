@@ -45,7 +45,7 @@ export class ReplyRequest extends EventEmitter {
             });
         },
 
-        setChatTitle: async (title: string) => {
+        setChat标题: async (title: string) => {
             this.yChat.title = title;
         },
     } as PluginContext);
@@ -68,7 +68,7 @@ export class ReplyRequest extends EventEmitter {
             this.scheduleTimeout();
 
             await pluginRunner("preprocess-model-input", this.pluginContext, async plugin => {
-                const output = await plugin.preprocessModelInput(this.mutatedMessages, this.mutatedParameters);
+                const output = await plugin.preprocess模型Input(this.mutatedMessages, this.mutatedParameters);
                 this.mutatedMessages = output.messages;
                 this.mutatedParameters = output.parameters;
                 this.lastChunkReceivedAt = Date.now();
@@ -83,9 +83,9 @@ export class ReplyRequest extends EventEmitter {
             const eventIterator = new EventEmitterAsyncIterator<string>(emitter, ["data", "done", "error"]);
 
             for await (const event of eventIterator) {
-                const { eventName, value } = event;
+                const { event名称, value } = event;
 
-                switch (eventName) {
+                switch (event名称) {
                     case 'data':
                         await this.onData(value);
                         break;
@@ -117,7 +117,7 @@ export class ReplyRequest extends EventEmitter {
         this.content = value;
 
         await pluginRunner("postprocess-model-output", this.pluginContext, async plugin => {
-            const output = await plugin.postprocessModelOutput({
+            const output = await plugin.postprocess模型Output({
                 role: 'assistant',
                 content: this.content,
             }, this.mutatedMessages, this.mutatedParameters, false);
@@ -140,7 +140,7 @@ export class ReplyRequest extends EventEmitter {
         this.yChat.onMessageDone(this.replyID);
 
         await pluginRunner("postprocess-model-output", this.pluginContext, async plugin => {
-            const output = await plugin.postprocessModelOutput({
+            const output = await plugin.postprocess模型Output({
                 role: 'assistant',
                 content: this.content,
             }, this.mutatedMessages, this.mutatedParameters, true);
@@ -167,7 +167,7 @@ export class ReplyRequest extends EventEmitter {
         this.yChat.onMessageDone(this.replyID);
     }
 
-    public onCancel() {
+    public on取消() {
         clearInterval(this.timer);
         this.done = true;
         this.yChat.onMessageDone(this.replyID);

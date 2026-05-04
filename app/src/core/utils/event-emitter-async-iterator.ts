@@ -1,7 +1,7 @@
 import EventEmitter from 'events';
 
 export interface EventEmitterAsyncIteratorOutput<T> {
-    eventName: string;
+    event名称: string;
     value: T;
 }
 
@@ -20,7 +20,7 @@ export interface EventEmitterAsyncIteratorOutput<T> {
  * const asyncIterator = new EventEmitterAsyncIterator(eventEmitter, ['event1', 'event2']);
  *
  * for await (const event of asyncIterator) {
- *   console.log(`Received event: ${event.eventName} with value: ${event.value}`);
+ *   console.log(`Received event: ${event.event名称} with value: ${event.value}`);
  * }
  */
 
@@ -30,15 +30,15 @@ export class EventEmitterAsyncIterator<T> implements AsyncIterableIterator<Event
 
     /**
      * Constructor takes an EventEmitter instance and an array of event names to listen to.
-     * For each event name, it binds the pushEvent method with the eventName, which
+     * For each event name, it binds the pushEvent method with the event名称, which
      * will be called when the event is emitted.
      *
      * @param eventEmitter - The EventEmitter instance to listen to events from.
-     * @param eventNames - An array of event names to listen to.
+     * @param event名称s - An array of event names to listen to.
      */
-    constructor(private eventEmitter: EventEmitter, eventNames: string[]) {
-        for (const eventName of eventNames) {
-            this.eventEmitter.on(eventName, this.pushEvent.bind(this, eventName));
+    constructor(private eventEmitter: EventEmitter, event名称s: string[]) {
+        for (const event名称 of event名称s) {
+            this.eventEmitter.on(event名称, this.pushEvent.bind(this, event名称));
         }
     }
 
@@ -67,12 +67,12 @@ export class EventEmitterAsyncIterator<T> implements AsyncIterableIterator<Event
      * If there is a pending Promise in the resolveQueue, it resolves the Promise with the new event.
      * If there is no pending Promise, it adds the event to the eventQueue.
      *
-     * @param eventName - The name of the emitted event.
+     * @param event名称 - The name of the emitted event.
      * @param value - The value emitted with the event.
      */
-    private pushEvent(eventName: string, value: T): void {
+    private pushEvent(event名称: string, value: T): void {
         const output: EventEmitterAsyncIteratorOutput<T> = {
-            eventName,
+            event名称,
             value,
         };
         if (this.resolveQueue.length > 0) {

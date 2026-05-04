@@ -11,7 +11,7 @@ import { importChat } from './chat/chat-persistance';
 const endpoint = '/chatapi';
 
 export let backend: {
-    current?: Backend | null
+    current?: 返回end | null
 } = {};
 
 export interface User {
@@ -22,7 +22,7 @@ export interface User {
     services?: string[];
 }
 
-export class Backend extends EventEmitter {
+export class 返回end extends EventEmitter {
     public user: User | null = null;
     public services: string[] = [];
     private checkedSession = false;
@@ -30,7 +30,7 @@ export class Backend extends EventEmitter {
     private sessionInterval = new AsyncLoop(() => this.getSession(), 1000 * 30);
     private syncInterval = new AsyncLoop(() => this.sync(), 1000 * 5);
 
-    private pendingYUpdate: Uint8Array | null = null;
+    private pendingY更新: Uint8Array | null = null;
     private lastFullSyncAt = 0;
     private legacySync = false;
     private rateLimitedUntil = 0;
@@ -101,12 +101,12 @@ export class Backend extends EventEmitter {
 
         const sinceLastFullSync = Date.now() - this.lastFullSyncAt;
 
-        const pendingYUpdate = this.pendingYUpdate;
-        if (pendingYUpdate && pendingYUpdate.length > 4) {
-            this.pendingYUpdate = null;
+        const pendingY更新 = this.pendingY更新;
+        if (pendingY更新 && pendingY更新.length > 4) {
+            this.pendingY更新 = null;
 
             const encoder = encoding.createEncoder();
-            syncProtocol.writeUpdate(encoder, pendingYUpdate);
+            syncProtocol.write更新(encoder, pendingY更新);
 
             const response = await fetch(endpoint + '/y-sync', {
                 method: 'POST',
@@ -191,11 +191,11 @@ export class Backend extends EventEmitter {
         }
     }
 
-    public receiveYUpdate(update: Uint8Array) {
-        if (!this.pendingYUpdate) {
-            this.pendingYUpdate = update;
+    public receiveY更新(update: Uint8Array) {
+        if (!this.pendingY更新) {
+            this.pendingY更新 = update;
         } else {
-            this.pendingYUpdate = Y.mergeUpdates([this.pendingYUpdate, update]);
+            this.pendingY更新 = Y.merge更新s([this.pendingY更新, update]);
         }
     }
 

@@ -1,12 +1,12 @@
 import { BroadcastChannel } from 'broadcast-channel';
 import EventEmitter from 'events';
 import { v4 as uuidv4 } from 'uuid';
-import { Chat, Message, Parameters, UserSubmittedMessage } from './chat/types';
+import { Chat, Message, Parameters, User提交tedMessage } from './chat/types';
 import * as Y from 'yjs';
 import { IndexeddbPersistence } from 'y-indexeddb';
 import { YChatDoc } from './chat/y-chat';
-import { loadFromPreviousVersion as loadSavedChatsFromPreviousVersion } from './chat/chat-persistance';
-import { Search } from './search';
+import { loadFromPreviousVersion as load保存dChatsFromPreviousVersion } from './chat/chat-persistance';
+import { 搜索 } from './search';
 import { ReplyRequest } from './chat/create-reply';
 import { OptionsManager } from './options';
 import { Option } from './options/option';
@@ -19,7 +19,7 @@ export const channel = new BroadcastChannel('chats');
 export class ChatManager extends EventEmitter {
     public doc!: YChatDoc;
     private provider!: IndexeddbPersistence;
-    private search!: Search;
+    private search!: 搜索;
     public options!: OptionsManager;
     private username: string | null = "anonymous";
 
@@ -36,14 +36,14 @@ export class ChatManager extends EventEmitter {
 
         this.doc = this.attachYDoc('anonymous');
 
-        loadSavedChatsFromPreviousVersion(this.doc)
+        load保存dChatsFromPreviousVersion(this.doc)
             .then(() => this.emit('update'));
         
         setInterval(() => this.emitChanges(), 100);
 
         channel.onmessage = message => {
             if (message.type === 'y-update') {
-                this.applyYUpdate(message.data);
+                this.applyY更新(message.data);
             }
         };
 
@@ -79,7 +79,7 @@ export class ChatManager extends EventEmitter {
                 console.log("IDB/sync update");
             }
         });
-        this.search = new Search(this);
+        this.search = new 搜索(this);
 
         this.options = new OptionsManager(this.doc, pluginMetadata);
         this.options.on('update', (...args) => this.emit('plugin-options-update', ...args));
@@ -106,7 +106,7 @@ export class ChatManager extends EventEmitter {
             // import chats from the anonymous doc after signing in
             provider?.whenSynced.then(() => {
                 if (doc) {
-                    Y.applyUpdate(this.doc.root, Y.encodeStateAsUpdate(doc.root));
+                    Y.apply更新(this.doc.root, Y.encodeStateAs更新(doc.root));
                     setTimeout(() => provider.clearData(), 10 * 1000);
                 }
             });
@@ -115,8 +115,8 @@ export class ChatManager extends EventEmitter {
         return this.doc;
     }
 
-    public applyYUpdate(update: Uint8Array) {
-        Y.applyUpdate(this.doc.root, update);
+    public applyY更新(update: Uint8Array) {
+        Y.apply更新(this.doc.root, update);
     }
 
     private emitChanges() {
@@ -133,8 +133,8 @@ export class ChatManager extends EventEmitter {
         }
     }
 
-    public async sendMessage(userSubmittedMessage: UserSubmittedMessage) {
-        const chat = this.doc.getYChat(userSubmittedMessage.chatID);
+    public async sendMessage(user提交tedMessage: User提交tedMessage) {
+        const chat = this.doc.getYChat(user提交tedMessage.chatID);
 
         if (!chat) {
             throw new Error('Chat not found');
@@ -142,11 +142,11 @@ export class ChatManager extends EventEmitter {
 
         const message: Message = {
             id: uuidv4(),
-            parentID: userSubmittedMessage.parentID,
-            chatID: userSubmittedMessage.chatID,
+            parentID: user提交tedMessage.parentID,
+            chatID: user提交tedMessage.chatID,
             timestamp: Date.now(),
             role: 'user',
-            content: userSubmittedMessage.content,
+            content: user提交tedMessage.content,
             done: true,
         };
 
@@ -155,7 +155,7 @@ export class ChatManager extends EventEmitter {
         const messages: Message[] = this.doc.getMessagesPrecedingMessage(message.chatID, message.id);
         messages.push(message);
 
-        await this.getReply(messages, userSubmittedMessage.requestedParameters);
+        await this.getReply(messages, user提交tedMessage.requestedParameters);
     }
 
     public async regenerate(message: Message, requestedParameters: Parameters) {
@@ -195,7 +195,7 @@ export class ChatManager extends EventEmitter {
     }
 
     public cancelReply(chatID: string | undefined, id: string) {
-        this.activeReplies.get(id)?.onCancel();
+        this.activeReplies.get(id)?.on取消();
         this.activeReplies.delete(id);
     }
 
@@ -242,7 +242,7 @@ export class ChatManager extends EventEmitter {
         this.options.resetOptions(pluginID, chatID);
     }
 
-    public getQuickSettings(): Array<{ groupID: string, option: Option }> {
+    public getQuick设置(): Array<{ groupID: string, option: Option }> {
         const options = this.options.getAllOptions('quick-settings');
         return Object.keys(options)
             .filter(key => options[key])

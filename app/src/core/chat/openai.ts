@@ -4,7 +4,7 @@ import SSE from "../utils/sse";
 import { OpenAIMessage, Parameters } from "./types";
 import { backend } from "../backend";
 
-export const defaultModel = 'gpt-3.5-turbo';
+export const default模型 = 'gpt-3.5-turbo';
 
 export function isProxySupported() {
     return !!backend.current?.services?.includes('openai');
@@ -55,7 +55,7 @@ export async function createChatCompletion(messages: OpenAIMessage[], parameters
     const endpoint = getEndpoint(proxied);
 
     if (!proxied && !parameters.apiKey) {
-        throw new Error('No API key provided');
+        throw new Error('否 API key provided');
     }
 
     const response = await fetch(endpoint + '/v1/chat/completions', {
@@ -84,7 +84,7 @@ export async function createStreamingChatCompletion(messages: OpenAIMessage[], p
     const endpoint = getEndpoint(proxied);
 
     if (!proxied && !parameters.apiKey) {
-        throw new Error('No API key provided');
+        throw new Error('否 API key provided');
     }
 
     const eventSource = new SSE(endpoint + '/v1/chat/completions', {
@@ -139,7 +139,7 @@ export async function createStreamingChatCompletion(messages: OpenAIMessage[], p
     };
 }
 
-export const maxTokensByModel = {
+export const maxTokensBy模型 = {
     "gpt-3.5-turbo": 4096,
     "gpt-4": 8192,
     "gpt-4-0613": 8192,

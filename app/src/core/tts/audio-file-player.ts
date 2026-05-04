@@ -61,7 +61,7 @@ export default class ExternalTTSAudioFilePlayer extends AbstractTTSPlayer {
     private downloadLoop: AsyncLoop;
     private schedulerLoop: AsyncLoop;
 
-    private sourceNodes: AudioBufferSourceNode[] = [];
+    private source否des: AudioBufferSource否de[] = [];
     private durations: number[] = [];
     private duration = 0;
 
@@ -91,7 +91,7 @@ export default class ExternalTTSAudioFilePlayer extends AbstractTTSPlayer {
             sentences.pop();
         }
 
-        const maxSentencesToDownload = this.sourceNodes[this.currentSentenceIndex] ? 2 : 1;
+        const maxSentencesToDownload = this.source否des[this.currentSentenceIndex] ? 2 : 1;
 
         const sentencesToDownload: number[] = [];
         for (let i = 0; i < sentences.length; i++) {
@@ -128,7 +128,7 @@ export default class ExternalTTSAudioFilePlayer extends AbstractTTSPlayer {
     private schedule = async () => {
         let time = this.startTime;
 
-        if (this.playing && this.sourceNodes[this.currentSentenceIndex] && audioContext.state === 'suspended') {
+        if (this.playing && this.source否des[this.currentSentenceIndex] && audioContext.state === 'suspended') {
 
             try {
                 await this.resumeAudioContext();
@@ -149,31 +149,31 @@ export default class ExternalTTSAudioFilePlayer extends AbstractTTSPlayer {
                     break;
                 }
 
-                if (!this.sourceNodes[i]) {
+                if (!this.source否des[i]) {
                     const audioBuffer = await audioContext.decodeAudioData(cloneArrayBuffer(audioArrayBuffer));
                     this.durations[i] = audioBuffer.duration;
 
-                    const sourceNode = audioContext.createBufferSource();
-                    sourceNode.buffer = audioBuffer;
+                    const source否de = audioContext.createBufferSource();
+                    source否de.buffer = audioBuffer;
 
                     if (i === this.requestedSentenceIndex) {
                         this.startTime = audioContext.currentTime;
                         time = this.startTime;
                     }
 
-                    sourceNode.start(time);
+                    source否de.start(time);
                     this.duration = time + this.durations[i] - this.startTime;
                     audioContextInUse = true;
 
-                    this.sourceNodes[i] = sourceNode;
+                    this.source否des[i] = source否de;
 
-                    sourceNode.connect(audioContext.destination);
+                    source否de.connect(audioContext.destination);
 
                     if (this.playing) {
                         await this.resumeAudioContext();
                     }
 
-                    sourceNode.onended = async () => {
+                    source否de.onended = async () => {
                         if (this.destroyed) {
                             return;
                         }
@@ -181,7 +181,7 @@ export default class ExternalTTSAudioFilePlayer extends AbstractTTSPlayer {
                         this.currentSentenceIndex = i + 1;
 
                         this.ended = this.complete && this.currentSentenceIndex === this.sentences.length;
-                        const isBuffering = !this.ended && !this.sourceNodes[this.currentSentenceIndex];
+                        const isBuffering = !this.ended && !this.source否des[this.currentSentenceIndex];
 
                         if (this.ended || isBuffering) {
                             await this.suspendAudioContext();
@@ -225,12 +225,12 @@ export default class ExternalTTSAudioFilePlayer extends AbstractTTSPlayer {
         return {
             playing: this.playing,
             ended: this.ended,
-            buffering: this.playing && !this.ended && !this.sourceNodes[this.currentSentenceIndex],
+            buffering: this.playing && !this.ended && !this.source否des[this.currentSentenceIndex],
             duration: this.duration,
             length: this.sentences.length,
             ready: this.audioArrayBuffers.filter(Boolean).length,
             index: this.currentSentenceIndex,
-            downloadable: this.complete && this.sourceNodes.length === this.sentences.length,
+            downloadable: this.complete && this.source否des.length === this.sentences.length,
         } as any;
     }
 
@@ -249,10 +249,10 @@ export default class ExternalTTSAudioFilePlayer extends AbstractTTSPlayer {
 
             resetAudioContext();
 
-            if (this.sourceNodes.length) {
+            if (this.source否des.length) {
                 resetAudioContext();
 
-                this.sourceNodes = [];
+                this.source否des = [];
                 this.durations = [];
                 this.duration = 0;
 
@@ -263,7 +263,7 @@ export default class ExternalTTSAudioFilePlayer extends AbstractTTSPlayer {
         } else if (audioContext.currentTime < this.duration) {
             await this.resumeAudioContext();
         } else {
-            await this.play(Math.max(0, this.sourceNodes.length - 1));
+            await this.play(Math.max(0, this.source否des.length - 1));
         }
         this.emit('state', this.getState());
     }
@@ -277,7 +277,7 @@ export default class ExternalTTSAudioFilePlayer extends AbstractTTSPlayer {
 
         resetAudioContext();
 
-        this.sourceNodes = [];
+        this.source否des = [];
         this.durations = [];
         this.duration = 0;
 

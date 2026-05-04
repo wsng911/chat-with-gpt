@@ -100,7 +100,7 @@ const Container = styled.div`
 `;
 
 export default function Sidebar(props: {
-    className?: string;
+    class名称?: string;
 }) {
     const intl = useIntl();
     const context = useAppContext();
@@ -122,43 +122,43 @@ export default function Sidebar(props: {
     }, []);
 
     const burgerLabel = sidebarOpen
-        ? intl.formatMessage({ defaultMessage: "Close sidebar" })
+        ? intl.formatMessage({ defaultMessage: "关闭 sidebar" })
         : intl.formatMessage({ defaultMessage: "Open sidebar" });
 
     const elem = useMemo(() => (
-        <Container className={"sidebar " + (sidebarOpen ? 'opened' : 'closed')} ref={ref}>
-            <div className="sidebar-header">
+        <Container class名称={"sidebar " + (sidebarOpen ? 'opened' : 'closed')} ref={ref}>
+            <div class名称="sidebar-header">
                 <h2><FormattedMessage defaultMessage={"Chat History"} description="Heading for the chat history screen" /></h2>
                 <Burger opened={sidebarOpen} onClick={onBurgerClick} aria-label={burgerLabel} transitionDuration={0} />
             </div>
-            <div className="sidebar-content">
+            <div class名称="sidebar-content">
                 <RecentChats />
             </div>
             {context.authenticated && (
                 <Menu width={width - 20}>
                     <Menu.Target>
-                        <div className="sidebar-footer">
+                        <div class名称="sidebar-footer">
                             <Avatar size="lg" src={context.user!.avatar} />
-                            <div className="user-info">
+                            <div class名称="user-info">
                                 <strong>{context.user!.name || context.user!.email}</strong>
                                 {!!context.user!.name && <span>{context.user!.email}</span>}
                             </div>
-                            <div className="spacer" />
+                            <div class名称="spacer" />
 
                             <ActionIcon variant="subtle">
-                                <i className="fas fa-ellipsis" />
+                                <i class名称="fas fa-ellipsis" />
                             </ActionIcon>
                         </div>
                     </Menu.Target>
                     <Menu.Dropdown>
                         <Menu.Item onClick={() => {
                             dispatch(setTab('user'));
-                        }} icon={<i className="fas fa-gear" />}>
+                        }} icon={<i class名称="fas fa-gear" />}>
                             <FormattedMessage defaultMessage={"User settings"} description="Menu item that opens the user settings screen" />
                         </Menu.Item>
 
                         <Menu.Divider />
-                        <Menu.Item color="red" onClick={() => backend.current?.logout()} icon={<i className="fas fa-sign-out-alt" />}>
+                        <Menu.Item color="red" onClick={() => backend.current?.logout()} icon={<i class名称="fas fa-sign-out-alt" />}>
                             <FormattedMessage defaultMessage={"Sign out"} />
                         </Menu.Item>
 

@@ -7,7 +7,7 @@ export const autoScrollOptions: OptionGroup = {
         {
             id: 'auto-scroll-when-opening-chat',
             defaultValue: false,
-            displayOnSettingsScreen: "ui",
+            displayOn设置Screen: "ui",
             displayAsSeparateSection: false,
             renderProps: {
                 type: "checkbox",
@@ -17,7 +17,7 @@ export const autoScrollOptions: OptionGroup = {
         {
             id: 'auto-scroll-while-generating',
             defaultValue: true,
-            displayOnSettingsScreen: "ui",
+            displayOn设置Screen: "ui",
             displayAsSeparateSection: false,
             renderProps: {
                 type: "checkbox",
@@ -34,16 +34,16 @@ export const inputOptions: OptionGroup = {
         {
             id: 'submit-on-enter',
             defaultValue: true,
-            displayOnSettingsScreen: "ui",
+            displayOn设置Screen: "ui",
             displayAsSeparateSection: false,
-            displayInQuickSettings: {
+            displayInQuick设置: {
                 name: "Enable/disable submit message when Enter is pressed",
                 displayByDefault: false,
                 label: (value) => value ? "Disable submit on Enter" : "Enable submit on Enter",
             },
             renderProps: {
                 type: "checkbox",
-                label: "Submit message when Enter is pressed",
+                label: "提交 message when Enter is pressed",
             },
         },
     ],
@@ -56,7 +56,7 @@ export const markdownOptions: OptionGroup = {
         {
             id: 'katex',
             defaultValue: false,
-            displayOnSettingsScreen: "ui",
+            displayOn设置Screen: "ui",
             renderProps: {
                 type: "checkbox",
                 label: "Enable Katex math rendering (experimental)",

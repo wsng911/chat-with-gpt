@@ -75,35 +75,35 @@ function ChatListItem(props: { chat: any, onClick: any, selected: boolean }) {
     const modals = useModals();
     const navigate = useNavigate();
 
-    const onDelete = useCallback((e?: React.MouseEvent) => {
+    const on删除 = useCallback((e?: React.MouseEvent) => {
         e?.preventDefault();
         e?.stopPropagation();
         
-        modals.openConfirmModal({
+        modals.open确认Modal({
             title: "Are you sure you want to delete this chat?",
             children: <p style={{ lineHeight: 1.7 }}>The chat "{c.title}" will be permanently deleted. This cannot be undone.</p>,
             labels: {
-                confirm: "Delete permanently",
-                cancel: "Cancel",
+                confirm: "删除 permanently",
+                cancel: "取消",
             },
             confirmProps: {
                 color: 'red',
             },
-            onConfirm: async () => {
+            on确认: async () => {
                 try {
                     await backend.current?.deleteChat(c.chatID);
                     context.chat.deleteChat(c.chatID);
                     navigate('/');
                 } catch (e) {
                     console.error(e);
-                    modals.openConfirmModal({
+                    modals.open确认Modal({
                         title: "Something went wrong",
                         children: <p style={{ lineHeight: 1.7 }}>The chat "{c.title}" could not be deleted.</p>,
                         labels: {
                             confirm: "Try again",
-                            cancel: "Cancel",
+                            cancel: "取消",
                         },
-                        onConfirm: () => onDelete(),
+                        on确认: () => on删除(),
                     });
                 }
             },
@@ -137,7 +137,7 @@ function ChatListItem(props: { chat: any, onClick: any, selected: boolean }) {
                         modals.closeAll();
                     }}
                 >
-                    Save changes
+                    保存 changes
                 </Button>
             </div>,
         });
@@ -155,24 +155,24 @@ function ChatListItem(props: { chat: any, onClick: any, selected: boolean }) {
         <ChatListItemLink to={'/chat/' + c.chatID}
             onClick={props.onClick}
             data-chat-id={c.chatID}
-            className={props.selected ? 'selected' : ''}>
+            class名称={props.selected ? 'selected' : ''}>
             <strong>{c.title || <FormattedMessage defaultMessage={"Untitled"} description="default title for untitled chat sessions" />}</strong>
             <Menu opened={menuOpen} 
                     closeOnClickOutside={true} 
                     closeOnEscape={true}
-                    onClose={() => setMenuOpen(false)}>
+                    on关闭={() => setMenuOpen(false)}>
                 <Menu.Target>
                     <ActionIcon size="xl" onClick={toggleMenu}>
-                        <i className="fas fa-ellipsis" />
+                        <i class名称="fas fa-ellipsis" />
                     </ActionIcon>
                 </Menu.Target>
                 <Menu.Dropdown>
-                    <Menu.Item onClick={onRename} icon={<i className="fa fa-edit" />}>
+                    <Menu.Item onClick={onRename} icon={<i class名称="fa fa-edit" />}>
                         <FormattedMessage defaultMessage={"Rename this chat"} />
                     </Menu.Item>
                     <Menu.Divider />
-                    <Menu.Item onClick={onDelete} color="red" icon={<i className="fa fa-trash" />}>
-                        <FormattedMessage defaultMessage={"Delete this chat"} />
+                    <Menu.Item onClick={on删除} color="red" icon={<i class名称="fa fa-trash" />}>
+                        <FormattedMessage defaultMessage={"删除 this chat"} />
                     </Menu.Item>
                 </Menu.Dropdown>
             </Menu>
@@ -221,7 +221,7 @@ export default function RecentChats(props: any) {
                 <Loader size="sm" variant="dots" />
             </Empty>}
             {recentChats.length === 0 && synced && <Empty>
-                <FormattedMessage defaultMessage={"No chats yet."} description="Message shown on the Chat History screen for new users who haven't started their first chat session" />
+                <FormattedMessage defaultMessage={"否 chats yet."} description="Message shown on the Chat History screen for new users who haven't started their first chat session" />
             </Empty>}
         </Container>
     );

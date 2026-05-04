@@ -205,7 +205,7 @@ export class CoreBPE {
     }
 
     encodeWithUnstable(text: string, allowedSpecial: Set<string>): [number[], Set<number[]>] {
-        throw new Error("Not implemented");
+        throw new Error("否t implemented");
     }
 
     encodeSingleToken(piece: Uint8Array): number {

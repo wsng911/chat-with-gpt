@@ -1,10 +1,10 @@
-import MiniSearch, { SearchResult } from 'minisearch'
+import Mini搜索, { 搜索Result } from 'minisearch'
 import { ellipsize } from './utils';
 import { ChatManager } from '.';
 import { Chat, Message } from './chat/types';
 
-export class Search {
-    private index = new MiniSearch({
+export class 搜索 {
+    private index = new Mini搜索({
         fields: ['value'],
         storeFields: ['id', 'value'],
     });
@@ -42,22 +42,22 @@ export class Search {
             const searchResults = this.context.all()
                 .sort((a, b) => b.updated - a.updated)
                 .slice(0, 10);
-            const results = this.processSearchResults(searchResults);
+            const results = this.process搜索Results(searchResults);
             return results;
         }
 
         let searchResults = this.index.search(query, { fuzzy: 0.2 });
-        let output = this.processSearchResults(searchResults);
+        let output = this.process搜索Results(searchResults);
 
         if (!output.length) {
             searchResults = this.index.search(query, { prefix: true });
-            output = this.processSearchResults(searchResults);
+            output = this.process搜索Results(searchResults);
         }
 
         return output;
     }
 
-    private processSearchResults(searchResults: SearchResult[] | Chat[]) {
+    private process搜索Results(searchResults: 搜索Result[] | Chat[]) {
         const output: any[] = [];
         for (const item of searchResults) {
             const chatID = item.id;

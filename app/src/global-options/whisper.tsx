@@ -9,7 +9,7 @@ export const whisperOptions: OptionGroup = {
         {
             id: 'use-whisper',
             defaultValue: false,
-            displayOnSettingsScreen: "speech",
+            displayOn设置Screen: "speech",
             displayAsSeparateSection: false,
             renderProps: {
                 type: "checkbox",
@@ -20,7 +20,7 @@ export const whisperOptions: OptionGroup = {
         {
             id: 'show-microphone',
             defaultValue: true,
-            displayOnSettingsScreen: "speech",
+            displayOn设置Screen: "speech",
             displayAsSeparateSection: false,
             renderProps: {
                 type: "checkbox",

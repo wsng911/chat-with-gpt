@@ -25,10 +25,10 @@ export const settingsUISlice = createSlice({
 
 export const { setTab, setOption, setTabAndOption } = settingsUISlice.actions;
 
-export const closeSettingsUI = () => settingsUISlice.actions.setTabAndOption({ tab: '', option: '' });
+export const close设置UI = () => settingsUISlice.actions.setTabAndOption({ tab: '', option: '' });
 
-export const selectSettingsTab = (state: RootState) => state.settingsUI.tab;
-export const selectSettingsOption = (state: RootState) => state.settingsUI.option;
+export const select设置Tab = (state: RootState) => state.settingsUI.tab;
+export const select设置Option = (state: RootState) => state.settingsUI.option;
 
 export const openOpenAIApiKeyPanel = () => settingsUISlice.actions.setTabAndOption({ tab: 'user', option: 'apiKey' });
 export const openElevenLabsApiKeyPanel = () => settingsUISlice.actions.setTabAndOption({ tab: 'speech', option: 'elevenlabs-api-key' });

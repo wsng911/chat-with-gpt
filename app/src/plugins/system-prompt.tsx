@@ -1,6 +1,6 @@
 import { FormattedMessage } from "react-intl";
 import Plugin from "../core/plugins";
-import { PluginDescription } from "../core/plugins/plugin-description";
+import { Plugin描述 } from "../core/plugins/plugin-description";
 import { OpenAIMessage, Parameters } from "../core/chat/types";
 
 export const defaultSystemPrompt = `
@@ -14,26 +14,26 @@ export interface SystemPromptPluginOptions {
 }
 
 export class SystemPromptPlugin extends Plugin<SystemPromptPluginOptions> {
-    describe(): PluginDescription {
+    describe(): Plugin描述 {
         return {
             id: "system-prompt",
-            name: "System Prompt",
+            name: "系统提示词",
             options: [
                 {
                     id: "systemPrompt",
                     defaultValue: defaultSystemPrompt,
-                    displayOnSettingsScreen: "chat",
+                    displayOn设置Screen: "chat",
                     resettable: true,
                     scope: "chat",
                     renderProps: {
                         type: "textarea",
                         description: <p>
-                            <FormattedMessage defaultMessage={"The System Prompt is an invisible message inserted at the start of the chat and can be used to give ChatGPT information about itself and general guidelines for how it should respond. The <code>'{{ datetime }}'</code> tag is automatically replaced by the current date and time (use this to give the AI access to the time)."}
+                            <FormattedMessage defaultMessage={"The 系统提示词 is an invisible message inserted at the start of the chat and can be used to give ChatGPT information about itself and general guidelines for how it should respond. The <code>'{{ datetime }}'</code> tag is automatically replaced by the current date and time (use this to give the AI access to the time)."}
                                 values={{ code: v => <code>{v}</code> }} />
                         </p>,
                     },
-                    displayInQuickSettings: {
-                        name: "System Prompt",
+                    displayInQuick设置: {
+                        name: "系统提示词",
                         displayByDefault: true,
                         label: "Customize system prompt",
                     },
@@ -42,7 +42,7 @@ export class SystemPromptPlugin extends Plugin<SystemPromptPluginOptions> {
         };
     }
 
-    async preprocessModelInput(messages: OpenAIMessage[], parameters: Parameters): Promise<{ messages: OpenAIMessage[]; parameters: Parameters; }> {
+    async preprocess模型Input(messages: OpenAIMessage[], parameters: Parameters): Promise<{ messages: OpenAIMessage[]; parameters: Parameters; }> {
         const output = [
             {
                 role: 'system',

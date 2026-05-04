@@ -2,8 +2,8 @@ import { Button, FileButton } from "@mantine/core";
 import { importChat } from "../../core/chat/chat-persistance";
 import { Chat, serializeChat } from "../../core/chat/types";
 import { useAppContext } from "../../core/context";
-import SettingsOption from "./option";
-import SettingsTab from "./tab";
+import 设置Option from "./option";
+import 设置Tab from "./tab";
 import { useState, useCallback } from "react";
 
 export default function UserOptionsTab(props: any) {
@@ -62,7 +62,7 @@ export default function UserOptionsTab(props: any) {
 
     const successMessage = importedChats ? (
         <div style={{ color: 'green' }}>
-            <i className="fa fa-check-circle"></i>
+            <i class名称="fa fa-check-circle"></i>
             <span style={{ marginLeft: '0.5em' }}>Imported {importedChats} chat(s)</span>
         </div>
     ) : null;
@@ -72,8 +72,8 @@ export default function UserOptionsTab(props: any) {
     ) : null;
 
     return (
-        <SettingsTab name="user">
-            <SettingsOption heading="Import and Export">
+        <设置Tab name="user">
+            <设置Option heading="Import and Export">
                 <div>
                     <Button variant="light" onClick={handleExport} style={{
                         marginRight: '1rem',
@@ -84,7 +84,7 @@ export default function UserOptionsTab(props: any) {
                 </div>
                 {successMessage}
                 {errorMessageElement}
-            </SettingsOption>
-        </SettingsTab>
+            </设置Option>
+        </设置Tab>
     );
 }

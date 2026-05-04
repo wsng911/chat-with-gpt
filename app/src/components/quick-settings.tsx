@@ -26,17 +26,17 @@ const Container = styled.div`
     }
 `;
 
-export function QuickSettingsButton(props: { groupID: string, option: Option }) {
+export function Quick设置Button(props: { groupID: string, option: Option }) {
     const context = useAppContext();
     const dispatch = useAppDispatch();
 
     const [value] = useOption(props.groupID, props.option.id, context.id || undefined);
 
     const onClick = useCallback(() => {
-        dispatch(setTabAndOption({ tab: props.option.displayOnSettingsScreen, option: props.option.id }));
+        dispatch(setTabAndOption({ tab: props.option.displayOn设置Screen, option: props.option.id }));
     }, [props.groupID, props.option.id, dispatch]);
 
-    const labelBuilder = props.option.displayInQuickSettings?.label;
+    const labelBuilder = props.option.displayInQuick设置?.label;
     let label = props.option.id;
     
     if (labelBuilder) {
@@ -52,15 +52,15 @@ export function QuickSettingsButton(props: { groupID: string, option: Option }) 
     )
 }
 
-export default function QuickSettings(props: any) {
+export default function Quick设置(props: any) {
     const context = useAppContext();
-    const options = context.chat.getQuickSettings();
+    const options = context.chat.getQuick设置();
 
     if (!options.length) {
         return <div style={{ height: '1rem' }} />;
     }
 
     return <Container>
-        {options.map(o => <QuickSettingsButton groupID={o.groupID} option={o.option} key={o.groupID + "." + o.option.id} />)}
+        {options.map(o => <Quick设置Button groupID={o.groupID} option={o.option} key={o.groupID + "." + o.option.id} />)}
     </Container>;
 }

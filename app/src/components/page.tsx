@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 import { SpotlightProvider } from '@mantine/spotlight';
 import { useChatSpotlightProps } from '../spotlight';
-import { LoginModal, CreateAccountModal } from './auth-modals';
+import { LoginModal, 创建AccountModal } from './auth-modals';
 import Header, { HeaderProps, SubHeader } from './header';
 import MessageInput from './input';
-import { InstallUpdateNotification } from './pwa-notifications';
-import SettingsDrawer from './settings';
+import { Install更新否tification } from './pwa-notifications';
+import 设置Drawer from './settings';
 import Sidebar from './sidebar';
 import AudioControls from './tts-controls';
 
@@ -88,10 +88,10 @@ export function Page(props: {
                 {props.children}
                 <AudioControls />
                 <MessageInput key={localStorage.getItem('openai-api-key')} />
-                <SettingsDrawer />
+                <设置Drawer />
                 <LoginModal />
-                <CreateAccountModal />
-                <InstallUpdateNotification />
+                <创建AccountModal />
+                <Install更新否tification />
             </Main>
         </Container>
     </SpotlightProvider>;

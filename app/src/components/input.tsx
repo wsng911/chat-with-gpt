@@ -7,10 +7,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../core/context';
 import { useAppDispatch, useAppSelector } from '../store';
 import { selectMessage, setMessage } from '../store/message';
-import { selectSettingsTab, openOpenAIApiKeyPanel } from '../store/settings-ui';
+import { select设置Tab, openOpenAIApiKeyPanel } from '../store/settings-ui';
 import { speechRecognition, supportsSpeechRecognition } from '../core/speech-recognition-types'
 import { useWhisper } from '@chengsokdara/use-whisper';
-import QuickSettings from './quick-settings';
+import Quick设置 from './quick-settings';
 import { useOption } from '../core/options/use-option';
 
 const Container = styled.div`
@@ -31,7 +31,7 @@ const Container = styled.div`
     }
 `;
 
-export declare type OnSubmit = (name?: string) => Promise<boolean>;
+export declare type On提交 = (name?: string) => Promise<boolean>;
 
 export interface MessageInputProps {
     disabled?: boolean;
@@ -61,7 +61,7 @@ export default function MessageInput(props: MessageInputProps) {
     const dispatch = useAppDispatch();
     const intl = useIntl();
 
-    const tab = useAppSelector(selectSettingsTab);
+    const tab = useAppSelector(select设置Tab);
 
     const [showMicrophoneButton] = useOption<boolean>('speech-recognition', 'show-microphone');
     const [submitOnEnter] = useOption<boolean>('input', 'submit-on-enter');
@@ -72,10 +72,10 @@ export default function MessageInput(props: MessageInputProps) {
 
     const pathname = useLocation().pathname;
 
-    const onSubmit = useCallback(async () => {
+    const on提交 = useCallback(async () => {
         setSpeechError(null);
 
-        const id = await context.onNewMessage(message);
+        const id = await context.on新建Message(message);
 
         if (id) {
             if (!window.location.pathname.includes(id)) {
@@ -209,7 +209,7 @@ export default function MessageInput(props: MessageInputProps) {
                     <Button variant="subtle" size="xs" compact onClick={() => {
                         context.chat.cancelReply(context.currentChat.chat?.id, context.currentChat.leaf!.id);
                     }}>
-                        <FormattedMessage defaultMessage={"Cancel"} description="Label for the button that can be clicked while the AI is generating a response to cancel generation" />
+                        <FormattedMessage defaultMessage={"取消"} description="Label for the button that can be clicked while the AI is generating a response to cancel generation" />
                     </Button>
                     <Loader size="xs" style={{ padding: '0 0.8rem 0 0.5rem' }} />
                 </>)}
@@ -220,7 +220,7 @@ export default function MessageInput(props: MessageInputProps) {
                                 <ActionIcon size="xl"
                                     onClick={onSpeechStart}>
                                     {transcribing && <Loader size="xs" />}
-                                    {!transcribing && <i className="fa fa-microphone" style={{ fontSize: '90%', color: recording ? 'red' : 'inherit' }} />}
+                                    {!transcribing && <i class名称="fa fa-microphone" style={{ fontSize: '90%', color: recording ? 'red' : 'inherit' }} />}
                                 </ActionIcon>
                             </Popover.Target>
                             <Popover.Dropdown>
@@ -238,20 +238,20 @@ export default function MessageInput(props: MessageInputProps) {
                                         Sorry, an error occured trying to record audio.
                                     </p>
                                     <Button variant="light" size="xs" fullWidth onClick={onHideSpeechError}>
-                                        Close
+                                        关闭
                                     </Button>
                                 </div>
                             </Popover.Dropdown>
                         </Popover>}
                         <ActionIcon size="xl"
-                            onClick={onSubmit}>
-                            <i className="fa fa-paper-plane" style={{ fontSize: '90%' }} />
+                            onClick={on提交}>
+                            <i class名称="fa fa-paper-plane" style={{ fontSize: '90%' }} />
                         </ActionIcon>
                     </>
                 )}
             </div>
         );
-    }, [recording, transcribing, onSubmit, onSpeechStart, props.disabled, context.generating, speechError, onHideSpeechError, showMicrophoneButton]);
+    }, [recording, transcribing, on提交, onSpeechStart, props.disabled, context.generating, speechError, onHideSpeechError, showMicrophoneButton]);
 
     const disabled = context.generating;
 
@@ -263,18 +263,18 @@ export default function MessageInput(props: MessageInputProps) {
     const hotkeyHandler = useMemo(() => {
         const keys = [
             ['Escape', blur, { preventDefault: true }],
-            ['ctrl+Enter', onSubmit, { preventDefault: true }],
+            ['ctrl+Enter', on提交, { preventDefault: true }],
 
         ];
         if (submitOnEnter) {
-            keys.unshift(['Enter', onSubmit, { preventDefault: true }]);
+            keys.unshift(['Enter', on提交, { preventDefault: true }]);
         }
         const handler = getHotkeyHandler(keys as any);
         return handler;
-    }, [onSubmit, blur, submitOnEnter]);
+    }, [on提交, blur, submitOnEnter]);
 
     return <Container>
-        <div className="inner">
+        <div class名称="inner">
             <Textarea disabled={props.disabled || disabled}
                 id="message-input"
                 autosize
@@ -286,7 +286,7 @@ export default function MessageInput(props: MessageInputProps) {
                 rightSection={rightSection}
                 rightSectionWidth={context.generating ? 100 : 55}
                 onKeyDown={hotkeyHandler} />
-            <QuickSettings key={tab} />
+            <Quick设置 key={tab} />
         </div>
     </Container>;
 }

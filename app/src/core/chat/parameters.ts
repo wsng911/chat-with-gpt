@@ -1,9 +1,9 @@
-import { defaultModel } from "./openai";
+import { default模型 } from "./openai";
 import { Parameters } from "./types";
 
 export const defaultParameters: Parameters = {
     temperature: 0.5,
-    model: defaultModel
+    model: default模型
 };
 
 export function loadParameters(id: string | null | undefined = null): Parameters {

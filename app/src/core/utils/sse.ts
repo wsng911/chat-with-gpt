@@ -41,7 +41,7 @@ export default class SSE {
         this.xhr = new XMLHttpRequest();
         this.xhr.addEventListener('progress', this.onStreamProgress);
         this.xhr.addEventListener('load', this.onStreamLoaded);
-        this.xhr.addEventListener('readystatechange', this.checkStreamClosed);
+        this.xhr.addEventListener('readystatechange', this.checkStream关闭d);
         this.xhr.addEventListener('error', this.onStreamFailure);
         this.xhr.addEventListener('abort', this.onStreamAbort);
         this.xhr.open(this.method, this.url);
@@ -53,7 +53,7 @@ export default class SSE {
     };
 
     /**
-     * Closes the SSE connection.
+     * 关闭s the SSE connection.
      */
     public close = () => {
         if (this.readyState === this.CLOSED) {
@@ -148,7 +148,7 @@ export default class SSE {
     };
 
     /**
-     * Adds an event listener for a given event type.
+     * 添加s an event listener for a given event type.
      */
     public addEventListener = (type: string, listener: any) => {
         if (this.listeners[type] === undefined) {
@@ -161,7 +161,7 @@ export default class SSE {
     };
 
     /**
-     * Removes an event listener for a given event type.
+     * 移除s an event listener for a given event type.
      */
     public removeEventListener = (type: string, listener: any) => {
         if (this.listeners[type] === undefined) {
@@ -243,7 +243,7 @@ export default class SSE {
     /**
      * Checks if the SSE connection is closed and sets the ready state to CLOSED if needed.
      */
-    private checkStreamClosed = () => {
+    private checkStream关闭d = () => {
         if (!this.xhr) {
             return;
         }
