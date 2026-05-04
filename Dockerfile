@@ -1,50 +1,33 @@
-FROM node:19-bullseye-slim AS build
+FROM node:20-alpine AS build
 
-RUN apt-get update && \
-    apt-get install -y \
-    git
-
-# Set working directory
 WORKDIR /app
 
-# Copy package.json and tsconfig.json
-COPY ./app/package.json ./
-COPY ./app/tsconfig.json ./
+RUN apk add --no-cache git && \
+    git config --global user.email "dev@example.com" && \
+    git config --global user.name "dev"
 
-# Install Node.js dependencies
+COPY package*.json ./
 RUN npm install
 
-COPY ./app/vite.config.js ./
+COPY . .
 
-# Copy public, and src directories
-COPY ./app/public ./public
-COPY ./app/src ./src
-COPY ./app/index.html ./
+RUN git init && git add -A && git commit -m "init" || true
 
-# Set environment variables
-ENV NODE_ENV=production
-
-# Build the application
 RUN npm run build
 
-FROM node:19-bullseye-slim AS server
+FROM node:20-alpine
 
-# Set the working directory
 WORKDIR /app
 
-COPY ./server/package.json ./server/tsconfig.json ./
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/package.json ./
 
-# Install Node.js dependencies from package.json
-RUN npm install
+RUN mkdir -p /app/data
 
-# Copy the rest of the application code into the working directory
-COPY ./server/src ./src
+ENV NODE_ENV=production
+ENV PORT=3000
 
-RUN CI=true sh -c "cd /app && npm run start && rm -rf data"
+EXPOSE 3000
 
-COPY --from=build /app/build /app/public
-
-LABEL org.opencontainers.image.source="https://github.com/cogentapps/chat-with-gpt"
-ENV PORT 3000
-
-CMD ["npm", "run", "start"]
+CMD ["node", "dist/server/index.js"]
